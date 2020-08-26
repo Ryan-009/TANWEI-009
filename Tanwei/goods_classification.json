@@ -1,0 +1,1611 @@
+[
+  {
+    "classification_0": "女装",
+    "classification_1_array": [
+      {
+        "classification_1": "女裙",
+        "classification_2_array": [
+          "连衣裙",
+          "半身裙",
+          "旗袍"
+        ]
+      },
+      {
+        "classification_1": "上装",
+        "classification_2_array": [
+          "T恤",
+          "衬衫",
+          "雪纺衫",
+          "卫衣",
+          "毛衣",
+          "马甲"
+        ]
+      },
+      {
+        "classification_1": "女裤",
+        "classification_2_array": [
+          "休闲裤",
+          "牛仔裤",
+          "打底裤",
+          "西装裤",
+          "棉裤羽绒裤"
+        ]
+      },
+      {
+        "classification_1": "中老年女装",
+        "classification_2_array": [
+          "大码女装",
+          "中老年女装"
+        ]
+      },
+      {
+        "classification_1": "套装",
+        "classification_2_array": [
+          "时尚套装",
+          "运动套装"
+        ]
+      },
+      {
+        "classification_1": "外套",
+        "classification_2_array": [
+          "短外套",
+          "风衣",
+          "西装",
+          "羽绒服",
+          "毛呢大衣",
+          "棉衣棉服",
+          "皮草",
+          "皮衣"
+        ]
+      }
+    ]
+  },
+  {
+    "classification_0": "男装",
+    "classification_1_array": [
+      {
+        "classification_1": "裤子",
+        "classification_2_array": [
+          "休闲长裤",
+          "休闲短裤",
+          "牛仔长裤",
+          "卫裤",
+          "牛仔短裤",
+          "工装裤",
+          "皮裤",
+          "工装制服",
+          "运动套装",
+          "时尚套装"
+        ]
+      },
+      {
+        "classification_1": "上装",
+        "classification_2_array": [
+          "T恤",
+          "衬衫",
+          "polo",
+          "短外套",
+          "卫衣",
+          "羽绒服",
+          "背心马甲",
+          "风衣",
+          "皮衣",
+          "毛呢大衣",
+          "毛衣",
+          "棉衣",
+          "汉服",
+          "羊绒衫"
+        ]
+      },
+      {
+        "classification_1": "中老年男装",
+        "classification_2_array": [
+          "中老年上装",
+          "中老年套装",
+          "中老年下装",
+          "大码下装",
+          "大码上装"
+        ]
+      },
+      {
+        "classification_1": "正装",
+        "classification_2_array": [
+          "休闲套装",
+          "西裤",
+          "西服",
+          "西服套装"
+        ]
+      },
+      {
+        "classification_1": "男士内裤",
+        "classification_2_array": [
+          "三角",
+          "四角"
+        ]
+      }
+    ]
+  },
+  {
+    "classification_0": "百货",
+    "classification_1_array": [
+      {
+        "classification_1": "家用清洁",
+        "classification_2_array": [
+          "洗衣护理",
+          "拖把扫把",
+          "清洁剂",
+          "香薰蜡烛",
+          "清洁工具",
+          "围裙",
+          "家用刷",
+          "除味剂",
+          "防蛀灭虫",
+          "手套袖套"
+        ]
+      },
+      {
+        "classification_1": "毛发护理",
+        "classification_2_array": [
+          "洗发水",
+          "男士剃须",
+          "染发",
+          "头发造型",
+          "护发",
+          "脱毛膏"
+        ]
+      },
+      {
+        "classification_1": "洗浴用品",
+        "classification_2_array": [
+          "沐浴露",
+          "口腔清洁",
+          "香皂",
+          "沐浴清洁",
+          "爽身止汗",
+          "涂刷",
+          "洗手液",
+          "浴帽"
+        ]
+      },
+      {
+        "classification_1": "牙膏/牙刷",
+        "classification_2_array": [
+          "牙膏",
+          "牙刷"
+        ]
+      },
+      {
+        "classification_1": "纸品湿巾",
+        "classification_2_array": [
+          "纸巾",
+          "吸油纸",
+          "湿巾",
+          "厨房纸巾"
+        ]
+      },
+      {
+        "classification_1": "女性护理",
+        "classification_2_array": [
+          "私处护理",
+          "卫生巾"
+        ]
+      },
+      {
+        "classification_1": "床上用品",
+        "classification_2_array": [
+          "床品套件",
+          "凉席蚊帐",
+          "枕头枕巾",
+          "被子被芯",
+          "床褥床垫",
+          "床品配饰",
+          "儿童床品"
+        ]
+      },
+      {
+        "classification_1": "清洁工具",
+        "classification_2_array": [
+          "省力拖把",
+          "浴室置物",
+          "浴室用品",
+          "垃圾清理",
+          "个人清洁",
+          "镜子梳子",
+          "厨房清洁",
+          "保暖用品"
+        ]
+      },
+      {
+        "classification_1": "居家日用",
+        "classification_2_array": [
+          "雨具",
+          "防护用品",
+          "打火机",
+          "降温用品",
+          "礼品包装",
+          "剪刀",
+          "驱虫用品",
+          "鞋用品"
+        ]
+      },
+      {
+        "classification_1": "收纳整理",
+        "classification_2_array": [
+          "收纳盒",
+          "收纳置物",
+          "阳台晾晒",
+          "衣架裤架",
+          "收纳袋",
+          "旅行收纳",
+          "防尘用具"
+        ]
+      },
+      {
+        "classification_1": "节庆礼品",
+        "classification_2_array": [
+          "创意礼品",
+          "婚庆用品",
+          "节日装扮",
+          "文创礼品",
+          "伴手礼",
+          "节日用品"
+        ]
+      },
+      {
+        "classification_1": "家居装饰",
+        "classification_2_array": [
+          "创意摆件",
+          "墙面装饰",
+          "家用贴饰",
+          "家用钟饰",
+          "香薰用品",
+          "花艺用品"
+        ]
+      },
+      {
+        "classification_1": "窗帘布艺",
+        "classification_2_array": [
+          "窗帘门帘",
+          "居家拖鞋",
+          "地毯地垫",
+          "抱枕坐垫",
+          "餐桌布艺",
+          "毛巾浴袍",
+          "防尘保持罩",
+          "缝纫用品"
+        ]
+      },
+      {
+        "classification_1": "餐饮用具",
+        "classification_2_array": [
+          "水杯",
+          "碗筷餐具",
+          "品质茶具",
+          "水壶",
+          "保鲜器皿",
+          "一次性餐具",
+          "酒杯",
+          "咖啡器具"
+        ]
+      },
+      {
+        "classification_1": "厨房置物架",
+        "classification_2_array": [
+          "锅具汤煲",
+          "厨房小工具",
+          "刀具砧板",
+          "烹饪厨具",
+          "厨房储物",
+          "烘培器具",
+          "烧烤用品",
+          "洒水壶",
+          "花园管"
+        ]
+      },
+      {
+        "classification_1": "绿植",
+        "classification_2_array": [
+          "花卉",
+          "果树",
+          "多肉植物",
+          "观赏鱼",
+          "花瓶花器",
+          "仿真绿植",
+          "栅栏篱笆",
+          "遮光网"
+        ]
+      },
+      {
+        "classification_1": "宠物",
+        "classification_2_array": [
+          "猫粮",
+          "狗粮",
+          "猫砂",
+          "犬猫营养膏"
+        ]
+      }
+    ]
+  },
+  {
+    "classification_0": "五金/电工",
+    "classification_1_array": [
+      {
+        "classification_1": "灯具五金",
+        "classification_2_array": [
+          "吊灯",
+          "吸顶灯",
+          "开关插座",
+          "台灯",
+          "户外庭院灯",
+          "筒灯",
+          "接线板",
+          "led光源"
+        ]
+      },
+      {
+        "classification_1": "厨房卫浴",
+        "classification_2_array": [
+          "厨房架类",
+          "浴室柜",
+          "花洒",
+          "水龙头",
+          "台盆",
+          "卫浴淋浴",
+          "水槽",
+          "坐便器",
+          "浴霸",
+          "智能马桶盖"
+        ]
+      },
+      {
+        "classification_1": "安防五金",
+        "classification_2_array": [
+          "摄像头",
+          "指纹锁",
+          "家用工具",
+          "电钻",
+          "家用门配件"
+        ]
+      },
+      {
+        "classification_1": "手动工具",
+        "classification_2_array": [
+          "五金工具箱",
+          "扳手",
+          "螺母批",
+          "钳子",
+          "电焊松香",
+          "点胶机",
+          "油漆刷"
+        ]
+      },
+      {
+        "classification_1": "机电五金",
+        "classification_2_array": [
+          "水泵",
+          "发电机",
+          "电焊",
+          "超重工具",
+          "电机配件",
+          "电热管"
+        ]
+      },
+      {
+        "classification_1": "工刃量具",
+        "classification_2_array": [
+          "卷尺",
+          "车刀",
+          "扩孔钻",
+          "电锤钻头",
+          "铣刀",
+          "麻花钻",
+          "机用丝锥"
+        ]
+      },
+      {
+        "classification_1": "动力工具",
+        "classification_2_array": [
+          "气钉枪",
+          "施工除尘器",
+          "气动元件"
+        ]
+      },
+      {
+        "classification_1": "农用物资",
+        "classification_2_array": [
+          "农用机械",
+          "农用杀菌剂",
+          "种子种苗",
+          "肥料",
+          "农用薄膜"
+        ]
+      },
+      {
+        "classification_1": "工业品",
+        "classification_2_array": [
+          "挖掘机",
+          "搬运车",
+          "商业设备",
+          "铝材",
+          "钢材",
+          "工业润滑油",
+          "洗唛洗涤标"
+        ]
+      },
+      {
+        "classification_1": "电气控制",
+        "classification_2_array": [
+          "蓄电池",
+          "变压器",
+          "变频器",
+          "工业开关",
+          "继电器"
+        ]
+      },
+      {
+        "classification_1": "安全防护",
+        "classification_2_array": [
+          "护栏隔离栏",
+          "安全网",
+          "消防灭火器",
+          "反光安全服",
+          "道路安全",
+          "建筑防尘网"
+        ]
+      },
+      {
+        "classification_1": "电子元器件",
+        "classification_2_array": [
+          "电机马达",
+          "开关按钮",
+          "电路板",
+          "显示屏",
+          "开发板",
+          "二极管",
+          "连接器",
+          "集成电路",
+          "电子线",
+          "电容器"
+        ]
+      },
+      {
+        "classification_1": "机械五金部件",
+        "classification_2_array": [
+          "球阀",
+          "管接头",
+          "传动带",
+          "化工管道",
+          "轴承",
+          "分离设备",
+          "齿轮",
+          "密封件",
+          "管夹",
+          "压力表",
+          "弹簧",
+          "传动链"
+        ]
+      }
+    ]
+  },
+  {
+    "classification_0": "手机/数码",
+    "classification_1_array": [
+      {
+        "classification_1": "手机配件",
+        "classification_2_array": [
+          "手机",
+          "充电宝",
+          "手机壳",
+          "手机耳机",
+          "数据线",
+          "手机充电器",
+          "手机贴纸",
+          "手机挂件",
+          "手机贴膜",
+          "手机支架",
+          "车载充电器",
+          "自拍杆"
+        ]
+      },
+      {
+        "classification_1": "影音娱乐",
+        "classification_2_array": [
+          "游戏机",
+          "耳机耳麦",
+          "音箱",
+          "家庭影院",
+          "MP3MP4",
+          "麦克风",
+          "随身听",
+          "影音电器",
+          "影棚设备"
+        ]
+      },
+      {
+        "classification_1": "电脑笔记本",
+        "classification_2_array": [
+          "笔记本电脑",
+          "平板电脑",
+          "整机一体机",
+          "显示器",
+          "鼠标键盘"
+        ]
+      },
+      {
+        "classification_1": "智能设备",
+        "classification_2_array": [
+          "智能手表",
+          "无人机",
+          "智能平衡车",
+          "儿童智能表",
+          "智能健康",
+          "翻译机"
+        ]
+      },
+      {
+        "classification_1": "商务办公",
+        "classification_2_array": [
+          "无屏投影",
+          "打印复印机",
+          "照片打印机",
+          "3D打印",
+          "智能收银",
+          "投票器",
+          "条码设备",
+          "办公室铭牌",
+          "墨盒硒鼓",
+          "广告图文"
+        ]
+      },
+      {
+        "classification_1": "网络产品",
+        "classification_2_array": [
+          "路由器",
+          "无线网卡",
+          "宽带办理",
+          "光纤跳线"
+        ]
+      },
+      {
+        "classification_1": "摄影摄像",
+        "classification_2_array": [
+          "数码相机",
+          "微单",
+          "胶卷相机",
+          "单反镜头",
+          "摄影脚架",
+          "胶卷胶片",
+          "摄影周边"
+        ]
+      },
+      {
+        "classification_1": "数码配件",
+        "classification_2_array": [
+          "电池",
+          "U盘",
+          "USB周边",
+          "电脑周边",
+          "硬盘",
+          "支架",
+          "手写笔",
+          "数码保护套",
+          "键盘膜",
+          "数码收纳",
+          "平板贴膜"
+        ]
+      }
+    ]
+  },
+  {
+    "classification_0": "鞋靴",
+    "classification_1_array": [
+      {
+        "classification_1": "女鞋",
+        "classification_2_array": [
+          "凉鞋",
+          "运动鞋",
+          "女鞋",
+          "高跟鞋",
+          "帆布鞋",
+          "穆勒鞋",
+          "豆豆鞋",
+          "罗马鞋",
+          "马丁靴",
+          "一字带凉鞋",
+          "乐福鞋",
+          "奶奶鞋",
+          "玛丽珍",
+          "雨鞋",
+          "切尔西靴",
+          "雪地靴"
+        ]
+      },
+      {
+        "classification_1": "男鞋",
+        "classification_2_array": [
+          "帆布鞋",
+          "网面鞋",
+          "休闲皮鞋",
+          "沙滩凉鞋",
+          "豆豆鞋",
+          "人字拖",
+          "正装皮鞋",
+          "工装靴",
+          "马丁靴",
+          "罗马鞋",
+          "洞洞鞋",
+          "雨鞋"
+        ]
+      }
+    ]
+  },
+  {
+    "classification_0": "箱包",
+    "classification_1_array": [
+      {
+        "classification_1": "女士包",
+        "classification_2_array": [
+          "斜挎包",
+          "单肩包",
+          "帆布包",
+          "手提包",
+          "真皮包",
+          "手拿包"
+        ]
+      },
+      {
+        "classification_1": "功能类箱包",
+        "classification_2_array": [
+          "双肩背包",
+          "旅行箱",
+          "钱包",
+          "旅行袋",
+          "卡包"
+        ]
+      },
+      {
+        "classification_1": "男士包",
+        "classification_2_array": [
+          "胸包",
+          "斜挎包",
+          "单肩包",
+          "真皮包",
+          "腰包"
+        ]
+      }
+    ]
+  },
+  {
+    "classification_0": "母婴",
+    "classification_1_array": [
+      {
+        "classification_1": "儿童玩具",
+        "classification_2_array": [
+          "益智玩具",
+          "拼装积木",
+          "过家家玩具",
+          "毛绒抱枕",
+          "洋娃娃",
+          "遥控玩具",
+          "户外玩具",
+          "玩具枪",
+          "早教故事机",
+          "戏水玩具",
+          "乐器玩具",
+          "婴儿健身器",
+          "游艺机",
+          "摇铃安抚玩",
+          "宝宝纪念品",
+          "涂色绘画",
+          "粘土玩具"
+        ]
+      },
+      {
+        "classification_1": "童装",
+        "classification_2_array": [
+          "套装",
+          "裙子",
+          "被子",
+          "T恤",
+          "礼服汉服",
+          "外套",
+          "内衣裤",
+          "家居服",
+          "袜子",
+          "配饰",
+          "衬衫",
+          "演出服",
+          "羽绒服",
+          "泳衣裤",
+          "毛衣针织衫",
+          "校服",
+          "防晒衣"
+        ]
+      },
+      {
+        "classification_1": "潮玩动漫",
+        "classification_2_array": [
+          "手办",
+          "模型",
+          "盲盒",
+          "动漫周边",
+          "桌游卡牌"
+        ]
+      },
+      {
+        "classification_1": "童鞋",
+        "classification_2_array": [
+          "凉拖",
+          "学步鞋",
+          "运动鞋",
+          "皮鞋",
+          "老北京布鞋",
+          "靴子",
+          "舞蹈鞋",
+          "鞋配件"
+        ]
+      },
+      {
+        "classification_1": "奶粉营养",
+        "classification_2_array": [
+          "婴儿奶粉",
+          "婴幼儿营养",
+          "婴幼儿维生",
+          "国风汉服",
+          "网红积木",
+          "月嫂"
+        ]
+      },
+      {
+        "classification_1": "洗护用品",
+        "classification_2_array": [
+          "纸尿裤",
+          "婴儿米粉",
+          "研磨器",
+          "果汁果泥",
+          "辅食奶糖储"
+        ]
+      }
+    ]
+  },
+  {
+    "classification_0": "饰品",
+    "classification_1_array": [
+      {
+        "classification_1": "服配",
+        "classification_2_array": [
+          "棒球帽",
+          "渔夫帽",
+          "男士腰带",
+          "防晒袖",
+          "草帽",
+          "遮阳帽",
+          "女士腰带",
+          "丝巾",
+          "礼帽",
+          "贝雷帽",
+          "围巾",
+          "毛线帽",
+          "手套",
+          "瓜皮帽",
+          "雷锋帽"
+        ]
+      },
+      {
+        "classification_1": "首饰",
+        "classification_2_array": [
+          "项链",
+          "耳饰",
+          "发饰",
+          "手链",
+          "戒指",
+          "手串",
+          "脚链",
+          "胸针"
+        ]
+      },
+      {
+        "classification_1": "手表",
+        "classification_2_array": [
+          "瑞士腕表",
+          "国产腕表",
+          "日韩腕表",
+          "欧美腕表"
+        ]
+      },
+      {
+        "classification_1": "眼镜",
+        "classification_2_array": [
+          "太阳镜",
+          "光学眼镜",
+          "防蓝光眼镜",
+          "老花镜"
+        ]
+      },
+      {
+        "classification_1": "珠宝",
+        "classification_2_array": [
+          "黄金",
+          "和田玉",
+          "翡翠",
+          "钻石",
+          "珍珠",
+          "宝石",
+          "琥珀"
+        ]
+      }
+    ]
+  },
+  {
+    "classification_0": "食品",
+    "classification_1_array": [
+      {
+        "classification_1": "礼品礼包",
+        "classification_2_array": [
+          "零售大礼包",
+          "伴手礼",
+          "喜糖",
+          "喜饼诞生礼",
+          "米其林美食"
+        ]
+      },
+      {
+        "classification_1": "零售",
+        "classification_2_array": [
+          "糕点",
+          "饼干",
+          "薯片",
+          "牛肉干",
+          "豆干",
+          "蜜饯果干",
+          "每日坚果",
+          "糖果",
+          "炒货",
+          "鱿鱼干",
+          "巧克力",
+          "奶酪零售",
+          "月饼"
+        ]
+      },
+      {
+        "classification_1": "方便速食",
+        "classification_2_array": [
+          "方便面",
+          "熟食",
+          "粉丝米线",
+          "煎饼冷面",
+          "方便粥饭",
+          "方便菜",
+          "速冻面点",
+          "火腿肠",
+          "泡菜",
+          "挂面",
+          "粽子"
+        ]
+      },
+      {
+        "classification_1": "乳饮",
+        "classification_2_array": [
+          "酸奶",
+          "饮料",
+          "餐奶",
+          "鲜奶",
+          "饮用水",
+          "儿童奶"
+        ]
+      },
+      {
+        "classification_1": "粮油调味",
+        "classification_2_array": [
+          "调味",
+          "五谷杂粮",
+          "食用油",
+          "火锅调料",
+          "大米",
+          "酒醋酱油",
+          "面粉",
+          "糖盐"
+        ]
+      },
+      {
+        "classification_1": "冲饮",
+        "classification_2_array": [
+          "麦片",
+          "代餐粉",
+          "豆浆奶茶",
+          "咖啡",
+          "姜汤冲饮"
+        ]
+      },
+      {
+        "classification_1": "茶",
+        "classification_2_array": [
+          "花草茶",
+          "绿茶",
+          "红茶",
+          "普洱",
+          "乌龙茶",
+          "茶叶礼盒",
+          "黑白白茶"
+        ]
+      },
+      {
+        "classification_1": "名酒",
+        "classification_2_array": [
+          "洋酒",
+          "国产白酒",
+          "啤酒",
+          "葡萄酒",
+          "名酒礼盒",
+          "保健酒"
+        ]
+      },
+      {
+        "classification_1": "烘焙原料",
+        "classification_2_array": [
+          "烘焙套装",
+          "面点原料"
+        ]
+      },
+      {
+        "classification_1": "南北干货",
+        "classification_2_array": [
+          "特色腊味",
+          "营养菌菇"
+        ]
+      }
+    ]
+  },
+  {
+    "classification_0": "美妆/内衣",
+    "classification_1_array": [
+      {
+        "classification_1": "彩妆",
+        "classification_2_array": [
+          "口红",
+          "粉底",
+          "彩妆套装",
+          "眼影眼线",
+          "修容",
+          "睫毛膏",
+          "眉粉"
+        ]
+      },
+      {
+        "classification_1": "护扶",
+        "classification_2_array": [
+          "护肤套装",
+          "面膜",
+          "洁面",
+          "防晒",
+          "男士洁面",
+          "乳液面霜",
+          "鼻贴",
+          "精华",
+          "眼霜",
+          "化妆水",
+          "卸妆",
+          "润唇膏"
+        ]
+      },
+      {
+        "classification_1": "美容美体",
+        "classification_2_array": [
+          "香水",
+          "美甲",
+          "美容仪",
+          "手霜手膜"
+        ]
+      },
+      {
+        "classification_1": "文胸/内衣",
+        "classification_2_array": [
+          "文胸",
+          "文胸套装",
+          "抹胸",
+          "乳贴",
+          "胸垫搭扣",
+          "女士内裤"
+        ]
+      },
+      {
+        "classification_1": "袜子",
+        "classification_2_array": [
+          "丝袜",
+          "连裤袜",
+          "船袜"
+        ]
+      },
+      {
+        "classification_1": "塑身",
+        "classification_2_array": [
+          "连体衣",
+          "分体塑身",
+          "塑身腰封"
+        ]
+      },
+      {
+        "classification_1": "居家",
+        "classification_2_array": [
+          "睡衣",
+          "睡裙",
+          "居家服套装",
+          "袜子",
+          "背心吊带",
+          "睡袍",
+          "睡裤",
+          "保暖内衣"
+        ]
+      }
+    ]
+  },
+  {
+    "classification_0": "家具家装",
+    "classification_1_array": [
+      {
+        "classification_1": "住宅家具",
+        "classification_2_array": [
+          "架类",
+          "木床",
+          "布艺沙发",
+          "餐桌",
+          "电脑桌书桌",
+          "梳妆台桌",
+          "茶几花几",
+          "折叠午休床",
+          "实木沙发",
+          "户外秋千",
+          "床垫",
+          "电椅",
+          "皮艺沙发",
+          "皮床"
+        ]
+      },
+      {
+        "classification_1": "家装建材",
+        "classification_2_array": [
+          "墙纸背景墙",
+          "瓷砖",
+          "地板",
+          "隔音隔热",
+          "美缝剂",
+          "防水材料",
+          "油漆涂料",
+          "家装除味"
+        ]
+      },
+      {
+        "classification_1": "全屋定制",
+        "classification_2_array": [
+          "定制衣柜",
+          "榻榻米",
+          "门",
+          "橱柜",
+          "窗",
+          "集成吊顶"
+        ]
+      }
+    ]
+  },
+  {
+    "classification_0": "电器",
+    "classification_1_array": [
+      {
+        "classification_1": "厨房小电器",
+        "classification_2_array": [
+          "电饭煲",
+          "电火锅",
+          "电热水壶",
+          "烤饼机",
+          "烤箱",
+          "榨汁机",
+          "料理机",
+          "电锅",
+          "搅拌机",
+          "微波炉",
+          "电压力锅",
+          "净水器",
+          "电炖锅",
+          "面包机",
+          "垃圾处理器",
+          "蒸箱",
+          "咖啡机"
+        ]
+      },
+      {
+        "classification_1": "生活电器",
+        "classification_2_array": [
+          "电风扇",
+          "热水器",
+          "家用小电器",
+          "吸尘器",
+          "烫衣熨斗",
+          "空气净化器",
+          "换气扇",
+          "电话对讲",
+          "取暖器"
+        ]
+      },
+      {
+        "classification_1": "大家电",
+        "classification_2_array": [
+          "空调",
+          "电视机",
+          "洗衣机",
+          "烘干机"
+        ]
+      },
+      {
+        "classification_1": "个护电器",
+        "classification_2_array": [
+          "理发器",
+          "电吹风",
+          "体重秤",
+          "美发器",
+          "保健按摩",
+          "按摩椅",
+          "除螨仪",
+          "足浴足疗",
+          "鼻毛修剪器",
+          "清洁电器"
+        ]
+      },
+      {
+        "classification_1": "厨房大电",
+        "classification_2_array": [
+          "油烟机",
+          "燃气灶",
+          "炉具",
+          "洗碗机",
+          "消毒柜",
+          "烟灶消套装",
+          "冰箱冷柜"
+        ]
+      }
+    ]
+  },
+  {
+    "classification_0": "文具/办公",
+    "classification_1_array": [
+      {
+        "classification_1": "文具教具",
+        "classification_2_array": [
+          "笔记本",
+          "笔袋",
+          "文具收纳",
+          "钢笔",
+          "书法画材",
+          "展示告示",
+          "台历挂历",
+          "装订用品",
+          "财会用品"
+        ]
+      },
+      {
+        "classification_1": "图书",
+        "classification_2_array": [
+          "文学社科",
+          "教材教辅",
+          "生活艺术",
+          "经管励志",
+          "科学技术",
+          "热门考试",
+          "进口原版"
+        ]
+      },
+      {
+        "classification_1": "个性定制",
+        "classification_2_array": [
+          "照片冲印",
+          "照片书",
+          "服装定制",
+          "包装纸箱",
+          "个性徽章",
+          "胸牌定做"
+        ]
+      },
+      {
+        "classification_1": "运动穿搭",
+        "classification_2_array": [
+          "休闲鞋",
+          "跑步鞋",
+          "篮球鞋",
+          "运动T恤",
+          "运动短裤",
+          "运动长裤",
+          "凉拖",
+          "运动文胸",
+          "运动手表",
+          "运动茄克",
+          "运动帽",
+          "健身服装",
+          "运动袜",
+          "运动卫衣",
+          "运动棉羽"
+        ]
+      },
+      {
+        "classification_1": "户外运动",
+        "classification_2_array": [
+          "自行车",
+          "传统台钓",
+          "电动自行车",
+          "望远镜",
+          "平衡车",
+          "电动滑板车",
+          "户外露营",
+          "户外照明",
+          "烧烤野餐",
+          "户外露营",
+          "户外照明",
+          "烧烤野餐",
+          "路亚钓",
+          "户外服装",
+          "户外装备",
+          "防护救生",
+          "户外箱包",
+          "户外饮水",
+          "旅行用品",
+          "户外鞋履",
+          "骑行装备",
+          "太极",
+          "滑雪装备"
+        ]
+      },
+      {
+        "classification_1": "健身塑型",
+        "classification_2_array": [
+          "女士泳衣",
+          "仰卧板",
+          "跑步机",
+          "哑铃",
+          "健腹轮",
+          "瑜伽服",
+          "瑜伽垫",
+          "健身车",
+          "拳击散打",
+          "广场舞",
+          "游泳装备",
+          "男士泳衣",
+          "芭蕾舞",
+          "划船机",
+          "椭圆机",
+          "空手道",
+          "跆拳道",
+          "拉丁爵士",
+          "柔道摔跤"
+        ]
+      },
+      {
+        "classification_1": "球类及配",
+        "classification_2_array": [
+          "篮球",
+          "羽毛球",
+          "运动包",
+          "台球",
+          "乒乓球",
+          "高尔夫",
+          "足球",
+          "网球",
+          "壁球",
+          "排球",
+          "保龄球",
+          "排球",
+          "橄榄球"
+        ]
+      },
+      {
+        "classification_1": "小众运动",
+        "classification_2_array": [
+          "滑板",
+          "轮滑",
+          "潜水用品",
+          "潜水体验",
+          "滑雪玩乐"
+        ]
+      },
+      {
+        "classification_1": "商务服务",
+        "classification_2_array": [
+          "样图效果图",
+          "平面设计",
+          "商标设计",
+          "3D绘图",
+          "设计素材",
+          "商务服务",
+          "企业V1",
+          "印刷"
+        ]
+      },
+      {
+        "classification_1": "企业定制",
+        "classification_2_array": [
+          "一次性杯子",
+          "团队服装",
+          "钥匙扣礼品",
+          "奖杯奖牌",
+          "奖状证书",
+          "会议笔记本",
+          "员工胸牌",
+          "广告扇定制",
+          "广告扑克牌",
+          "公司名片",
+          "企业U盘",
+          "徽章定制",
+          "企业箱包",
+          "标签定制",
+          "企业服标垫"
+        ]
+      },
+      {
+        "classification_1": "办公家具",
+        "classification_2_array": [
+          "办公桌椅",
+          "屏风隔断",
+          "前台接待",
+          "会议桌椅",
+          "办公柜"
+        ]
+      },
+      {
+        "classification_1": "办公设备耗材",
+        "classification_2_array": [
+          "封口机",
+          "标签机",
+          "投影幕布",
+          "标签纸",
+          "收银纸"
+        ]
+      },
+      {
+        "classification_1": "线下开店",
+        "classification_2_array": [
+          "餐饮家具",
+          "课桌椅",
+          "灯箱",
+          "服装店家具",
+          "超市家具",
+          "发廊家具",
+          "仓储货架",
+          "陈列展柜",
+          "商用展示柜",
+          "广告牌"
+        ]
+      },
+      {
+        "classification_1": "网络设备",
+        "classification_2_array": [
+          "交换机",
+          "光纤耦器"
+        ]
+      },
+      {
+        "classification_1": "乐器",
+        "classification_2_array": [
+          "吉他",
+          "钢琴",
+          "电子琴",
+          "古筝"
+        ]
+      }
+    ]
+  },
+  {
+    "classification_0": "保健",
+    "classification_1_array": [
+      {
+        "classification_1": "理疗仪",
+        "classification_2_array": [
+          "彩瞳",
+          "皮肤消毒",
+          "医用面膜",
+          "体温计",
+          "护具",
+          "血压计",
+          "洗鼻器",
+          "轮椅",
+          "血糖用品",
+          "家用制氧机",
+          "护理床",
+          "雾化器",
+          "眼镜护理液"
+        ]
+      },
+      {
+        "classification_1": "传统滋补",
+        "classification_2_array": [
+          "养生茶",
+          "燕窝",
+          "人参",
+          "冬虫夏草",
+          "阿胶",
+          "枸杞",
+          "藏红花",
+          "桃胶",
+          "蜂蜜"
+        ]
+      },
+      {
+        "classification_1": "保健品",
+        "classification_2_array": [
+          "补钙",
+          "胶原蛋白",
+          "复合维生素",
+          "美白丸",
+          "益生菌",
+          "鱼油",
+          "叶酸",
+          "膳食纤维",
+          "叶黄素",
+          "乳清蛋白",
+          "氨糖"
+        ]
+      },
+      {
+        "classification_1": "医疗服务",
+        "classification_2_array": [
+          "口腔护理",
+          "瘦脸针",
+          "体检"
+        ]
+      }
+    ]
+  },
+  {
+    "classification_0": "车品",
+    "classification_1_array": [
+      {
+        "classification_1": "车内装饰",
+        "classification_2_array": [
+          "汽车装饰",
+          "车内用品",
+          "汽车香氛",
+          "汽车坐垫",
+          "车载手机架",
+          "脚垫",
+          "国内置物",
+          "方向盘套",
+          "头枕腰靠",
+          "车蜡车膜",
+          "汽车车衣"
+        ]
+      },
+      {
+        "classification_1": "车用电器",
+        "classification_2_array": [
+          "行车记录仪",
+          "车用电器",
+          "汽车导航",
+          "车载冷热箱",
+          "车载充气泵",
+          "车载充电器",
+          "车用吸尘器",
+          "车用氧吧"
+        ]
+      },
+      {
+        "classification_1": "维修配件",
+        "classification_2_array": [
+          "车零配件",
+          "汽车轮胎",
+          "洗车工具",
+          "清洗剂",
+          "汽车油品",
+          "补胎工具",
+          "洗车添加剂"
+        ]
+      },
+      {
+        "classification_1": "安全用品",
+        "classification_2_array": [
+          "修车工具",
+          "防撞条",
+          "车用灭火器",
+          "车用密封条",
+          "胎压表",
+          "酒精测试仪",
+          "防冻液"
+        ]
+      },
+      {
+        "classification_1": "驾车出行",
+        "classification_2_array": [
+          "自驾游",
+          "包车出游"
+        ]
+      },
+      {
+        "classification_1": "摩托车",
+        "classification_2_array": [
+          "摩托车",
+          "摩托车配件",
+          "骑士服饰",
+          "骑士护具"
+        ]
+      },
+      {
+        "classification_1": "电动车",
+        "classification_2_array": [
+          "电动摩托车",
+          "电单车",
+          "电滑板车",
+          "电动车电池",
+          "电动车装备",
+          "平衡车"
+        ]
+      }
+    ]
+  },
+  {
+    "classification_0": "生鲜",
+    "classification_1_array": [
+      {
+        "classification_1": "肉类",
+        "classification_2_array": [
+          "牛排",
+          "火锅烧烤",
+          "鸡肉",
+          "牛肉",
+          "猪肉",
+          "羊肉",
+          "丸子类",
+          "鸭肉"
+        ]
+      },
+      {
+        "classification_1": "新鲜水果",
+        "classification_2_array": [
+          "榴莲",
+          "李子",
+          "菠萝蜜",
+          "火龙果",
+          "百香果",
+          "梨",
+          "奇异果",
+          "西柚",
+          "石榴"
+        ]
+      },
+      {
+        "classification_1": "蔬菜",
+        "classification_2_array": [
+          "番薯",
+          "葱姜蒜",
+          "菌菇",
+          "黄瓜",
+          "番茄",
+          "南瓜",
+          "芋头",
+          "山药",
+          "萝卜"
+        ]
+      },
+      {
+        "classification_1": "时令生鲜",
+        "classification_2_array": [
+          "桃",
+          "芒果",
+          "哈密瓜",
+          "枣"
+        ]
+      },
+      {
+        "classification_1": "海鲜",
+        "classification_2_array": [
+          "虾类",
+          "生蚝",
+          "帝王蟹",
+          "大闸蟹",
+          "梭子蟹",
+          "鲍鱼",
+          "海鲜大礼包",
+          "三文鱼",
+          "鳕鱼",
+          "海参",
+          "扇贝柱",
+          "小龙虾"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TWOpeningTipViewController" customModule="Tanwei" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" id="QPV-Yy-bpO">
+                    <rect key="frame" x="33" y="219" width="348" height="458"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开通批发商权限" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUf-BH-oL6">
+                            <rect key="frame" x="113" y="34" width="122" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.96537107229999997" green="0.64899754519999997" blue="0.14800766109999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="亲爱的用户,您的免费使用已到期,请开通卖家权限继续享受服务." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Let-iT-02y">
+                            <rect key="frame" x="30" y="85" width="288" height="41"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.96537107229999997" green="0.64899754519999997" blue="0.14800766109999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.可以无限制浏览批发商/卖家联系方式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVU-Ms-8Yo">
+                            <rect key="frame" x="30" y="176" width="244" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.可以无限制发布100个以上的商品信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9VN-b3-SvJ">
+                            <rect key="frame" x="30" y="213" width="251" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3.可以获得平台1000万+曝光流量扶持." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UgY-uB-DzH">
+                            <rect key="frame" x="30" y="250" width="244" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lDc-d5-dqG">
+                            <rect key="frame" x="30" y="193" width="244" height="1"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="Xxo-u6-tDN"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sNE-Ik-mJE">
+                            <rect key="frame" x="30" y="230" width="251" height="1"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="zTt-oR-d4d"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PId-AB-685">
+                            <rect key="frame" x="30" y="267" width="244" height="1"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="i9q-RR-OFx"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R7a-Qn-ug7">
+                            <rect key="frame" x="35" y="348" width="278" height="40"/>
+                            <color key="backgroundColor" red="0.96537107229999997" green="0.64899754519999997" blue="0.14800766109999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="Tds-9o-nDW"/>
+                            </constraints>
+                            <state key="normal" title="立即开通批发商权限">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="nVU-Ms-8Yo" firstAttribute="leading" secondItem="Let-iT-02y" secondAttribute="leading" id="3kN-0z-F56"/>
+                        <constraint firstAttribute="trailing" secondItem="R7a-Qn-ug7" secondAttribute="trailing" constant="35" id="4Hs-4Q-JEB"/>
+                        <constraint firstItem="sNE-Ik-mJE" firstAttribute="trailing" secondItem="9VN-b3-SvJ" secondAttribute="trailing" id="6EM-zc-HZV"/>
+                        <constraint firstItem="yUf-BH-oL6" firstAttribute="top" secondItem="QPV-Yy-bpO" secondAttribute="top" constant="34" id="Bh7-Xk-B2j"/>
+                        <constraint firstItem="sNE-Ik-mJE" firstAttribute="top" secondItem="9VN-b3-SvJ" secondAttribute="bottom" id="C2j-Wt-rdd"/>
+                        <constraint firstItem="lDc-d5-dqG" firstAttribute="trailing" secondItem="nVU-Ms-8Yo" secondAttribute="trailing" id="E9y-qG-sBV"/>
+                        <constraint firstItem="PId-AB-685" firstAttribute="top" secondItem="UgY-uB-DzH" secondAttribute="bottom" id="IX4-Jk-HwG"/>
+                        <constraint firstItem="Let-iT-02y" firstAttribute="leading" secondItem="QPV-Yy-bpO" secondAttribute="leading" constant="30" id="Jgc-T8-hDk"/>
+                        <constraint firstItem="UgY-uB-DzH" firstAttribute="top" secondItem="9VN-b3-SvJ" secondAttribute="bottom" constant="20" id="SWh-T1-FSC"/>
+                        <constraint firstItem="R7a-Qn-ug7" firstAttribute="top" secondItem="PId-AB-685" secondAttribute="bottom" constant="80" id="Zwb-L3-TxJ"/>
+                        <constraint firstItem="sNE-Ik-mJE" firstAttribute="leading" secondItem="9VN-b3-SvJ" secondAttribute="leading" id="eEE-Jd-p66"/>
+                        <constraint firstItem="PId-AB-685" firstAttribute="leading" secondItem="UgY-uB-DzH" secondAttribute="leading" id="eFO-pf-14L"/>
+                        <constraint firstAttribute="trailing" secondItem="Let-iT-02y" secondAttribute="trailing" constant="30" id="eMJ-8h-i8o"/>
+                        <constraint firstItem="PId-AB-685" firstAttribute="trailing" secondItem="UgY-uB-DzH" secondAttribute="trailing" id="k9f-eM-gFl"/>
+                        <constraint firstItem="lDc-d5-dqG" firstAttribute="leading" secondItem="nVU-Ms-8Yo" secondAttribute="leading" id="mCB-1F-TrT"/>
+                        <constraint firstItem="lDc-d5-dqG" firstAttribute="top" secondItem="nVU-Ms-8Yo" secondAttribute="bottom" id="moz-p0-CTr"/>
+                        <constraint firstItem="yUf-BH-oL6" firstAttribute="centerX" secondItem="QPV-Yy-bpO" secondAttribute="centerX" id="nIP-Sf-jfm"/>
+                        <constraint firstItem="Let-iT-02y" firstAttribute="top" secondItem="yUf-BH-oL6" secondAttribute="bottom" constant="30" id="nXF-Ss-wAs"/>
+                        <constraint firstItem="9VN-b3-SvJ" firstAttribute="top" secondItem="nVU-Ms-8Yo" secondAttribute="bottom" constant="20" id="p7p-mW-ruG"/>
+                        <constraint firstItem="9VN-b3-SvJ" firstAttribute="leading" secondItem="nVU-Ms-8Yo" secondAttribute="leading" id="vWa-gw-f4S"/>
+                        <constraint firstItem="UgY-uB-DzH" firstAttribute="leading" secondItem="9VN-b3-SvJ" secondAttribute="leading" id="yLG-iQ-kHX"/>
+                        <constraint firstItem="R7a-Qn-ug7" firstAttribute="leading" secondItem="QPV-Yy-bpO" secondAttribute="leading" constant="35" id="yfm-g6-uDh"/>
+                        <constraint firstItem="nVU-Ms-8Yo" firstAttribute="top" secondItem="Let-iT-02y" secondAttribute="bottom" constant="50" id="zME-BA-gih"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <point key="canvasLocation" x="139" y="99"/>
+        </view>
+    </objects>
+</document>
