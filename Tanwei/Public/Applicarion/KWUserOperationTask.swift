@@ -15,8 +15,8 @@ class KWUserOperation : NSObject {
         }) { (error) in failure() }
     }
     
-    internal func register(mobile: String, captcha: String, password: String,success: @escaping () -> (),failure:@escaping ()->()) {
-        KWNetwork.register(mobile: mobile, captcha: captcha, password: password, resendConfig: nil, success: { (respond) in
+    internal func register(mobile: String, captcha: String, password: String,recommentCode:String,success: @escaping () -> (),failure:@escaping ()->()) {
+        KWNetwork.register(mobile: mobile, captcha: captcha, password: password,recommentCode:recommentCode, resendConfig: nil, success: { (respond) in
             success()
         }) { (err) in
             failure()
@@ -142,16 +142,73 @@ class KWUserOperation : NSObject {
         }
     }
     
-    internal func publish(parameters:[String : Any],success: @escaping () -> (),failure:@escaping ()->()) {
+    internal func publish(parameters:[String : Any],success: @escaping () -> (),failure:@escaping (_ type:KWNetworkError.ErrorType)->()) {
         KWNetwork.publish(parameters: parameters, resendConfig: nil, success: { (respond) in
+            success()
+        }) { (err) in
+            failure(err)
+        }
+    }
+    
+    internal func opblacklist(op:Int,black_phone: String,success: @escaping () -> (),failure:@escaping ()->()) {
+        KWNetwork.opblacklist(op: op, black_phone: black_phone, resendConfig: nil, success: { (respond) in
             success()
         }) { (err) in
             failure()
         }
     }
     
-    internal func opblacklist(op:Int,black_phone: String,success: @escaping () -> (),failure:@escaping ()->()) {
-        KWNetwork.opblacklist(op: op, black_phone: black_phone, resendConfig: nil, success: { (respond) in
+    internal func becomeAgent(account:String,success: @escaping (_ data:agentInfo) -> (),failure:@escaping ()->()) {
+        KWNetwork.becomeAgent(account: account,resendConfig: nil, success: { (respond) in
+            success(KWParseTask.getAgentInfo(list: respond.data))
+        }) { (err) in
+            failure()
+        }
+    }
+    
+    
+    internal func addContent(contentId:Int,success: @escaping ()->(), failure: @escaping ()->()) {
+        KWNetwork.addContent(contentId:contentId,resendConfig: KWNetworkResendConfig(interval: 1, resendCount: 2), success: { (respond) in
+            success()
+        }) { (err) in
+            failure()
+        }
+    }
+    
+    internal func addFactory(userIdFocus:Int,success: @escaping ()->(), failure: @escaping ()->()) {
+        KWNetwork.addFactory(userIdFocus:userIdFocus,resendConfig: KWNetworkResendConfig(interval: 1, resendCount: 2), success: { (respond) in
+            success()
+        }) { (err) in
+            failure()
+        }
+    }
+    
+    internal func delContent(contentId:Int,success: @escaping ()->(), failure: @escaping ()->()) {
+        KWNetwork.delContent(contentId: contentId, resendConfig: nil, success: { (respond) in
+            success()
+        }) { (err) in
+            failure()
+        }
+    }
+    
+    internal func delFactory(userIdFocus:Int,success: @escaping ()->(), failure: @escaping ()->()) {
+        KWNetwork.delFactory(userIdFocus: userIdFocus, resendConfig: nil, success: { (respond) in
+            success()
+        }) { (err) in
+            failure()
+        }
+    }
+    
+    internal func setIdentity(userType:Int,success: @escaping ()->(), failure: @escaping ()->()) {
+        KWNetwork.setIdentity(userType: userType, resendConfig: nil, success: { (respond) in
+            success()
+        }) { (err) in
+            failure()
+        }
+    }
+    
+    internal func orderSave(orderCode:String,success: @escaping ()->(), failure: @escaping ()->()) {
+        KWNetwork.orderSave(orderCode: orderCode, resendConfig: nil, success: { (respond) in
             success()
         }) { (err) in
             failure()

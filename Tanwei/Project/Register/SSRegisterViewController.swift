@@ -23,6 +23,7 @@ class SSRegisterViewController: UIViewController {
         let tf = UITextField.init()
         tf.placeholder = "输入手机号"
         tf.font = UIFont.systemFont(ofSize: 18)
+        tf.keyboardType = .numberPad
         tf.textAlignment = .left
         return tf
     }()
@@ -32,13 +33,21 @@ class SSRegisterViewController: UIViewController {
         tf.placeholder = "输入验证码"
         tf.font = UIFont.systemFont(ofSize: 18)
         tf.textAlignment = .left
-        tf.isSecureTextEntry = true
         return tf
     }()
     
     fileprivate lazy var psTextFeild : UITextField = {
         let tf = UITextField.init()
         tf.placeholder = "输入密码"
+        tf.font = UIFont.systemFont(ofSize: 18)
+        tf.textAlignment = .left
+        return tf
+    }()
+    
+    fileprivate lazy var invitationCodeTextFeild : UITextField = {
+        let tf = UITextField.init()
+        tf.placeholder = "邀请码(选填)"
+        tf.keyboardType = .numberPad
         tf.font = UIFont.systemFont(ofSize: 18)
         tf.textAlignment = .left
         return tf
@@ -107,7 +116,7 @@ class SSRegisterViewController: UIViewController {
     
     fileprivate lazy var finishButton : UIButton = {
         let btn = UIButton(type: .system)
-        btn.frame = CGRect.init(x: AutoW(39), y: AutoW(505), width: SCREEN_WIDTH-AutoW(78), height: AutoW(55))
+        btn.frame = CGRect.init(x: AutoW(39), y: AutoW(570), width: SCREEN_WIDTH-AutoW(78), height: AutoW(55))
         btn.setTitleColor(UIColor.white, for: .normal)
         btn.backgroundColor = APPSubjectColor//ColorFromHexString("#7FC2FF")
         btn.setTitle("完成", for: .normal)
@@ -174,7 +183,8 @@ class SSRegisterViewController: UIViewController {
 }
 
 extension SSRegisterViewController{
-    func uiInit(){
+    fileprivate func uiInit() {
+        
         self.view.backgroundColor = UIColor.white
         self.view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
@@ -218,12 +228,32 @@ extension SSRegisterViewController{
             make.trailing.equalTo(AutoW(-39))
         }
         
-        self.view.addSubview(finishButton)
+        let invitationCodeInputView = UIView()
+        invitationCodeInputView.backgroundColor = ColorFromHexString("#F6F8FF")
+        invitationCodeInputView.layer.cornerRadius = AutoW(6)
+        invitationCodeInputView.clipsToBounds = true
+        self.view.addSubview(invitationCodeInputView)
+        invitationCodeInputView.snp.makeConstraints { (make) in
+            make.leading.equalTo(titleLabel)
+            make.top.equalTo(psInputView.snp.bottom).offset(AutoW(20))
+            make.height.equalTo(AutoW(55))
+            make.trailing.equalTo(AutoW(-39))
+        }
         
-//        self.smsInputView.addSubview(<#T##view: UIView##UIView#>)
+        invitationCodeInputView.addSubview(self.invitationCodeTextFeild)
+        invitationCodeTextFeild.snp.makeConstraints { (make) in
+            make.leading.equalTo(AutoW(25))
+            make.trailing.equalTo(AutoW(-25))
+            make.height.equalToSuperview()
+            make.top.equalToSuperview()
+        }
+        
+        self.view.addSubview(finishButton)
     }
 }
+
 extension SSRegisterViewController {
+    
     @objc func switheye(btn:UIButton) {
         if self.eyeButton.tag == 1 {
             self.eyeButton.tag = 2
@@ -235,6 +265,7 @@ extension SSRegisterViewController {
             self.eyeButton.setImage(UIImage(named:"不可见.png"), for: .normal)
         }
     }
+    
     @objc func finishFunction() {
         if !UnNil(self.mobileTextFeild.text) {
             KWHUD.showInfo(info: "请输入手机号")
@@ -248,7 +279,8 @@ extension SSRegisterViewController {
             KWHUD.showInfo(info: "请输入密码")
             return
         }
-        Application.opration.register(mobile: self.mobileTextFeild.text!, captcha: self.smsTextFeild.text!, password: self.psTextFeild.text!, success: {
+        
+        Application.opration.register(mobile: self.mobileTextFeild.text!, captcha: self.smsTextFeild.text!,password: self.psTextFeild.text!, recommentCode:self.invitationCodeTextFeild.text ?? "", success: {
             KWHUD.showInfo(info: "注册成功")
             self.navigationController?.popViewController(animated: true)
         }) {}

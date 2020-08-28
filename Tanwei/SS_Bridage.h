@@ -12,4 +12,5 @@
 #import "DLAlertView.h"
 #import "NSBundle+CLLanguage.h"
 #import "DeviceInfo.h"
+#import "WXApi.h"
 #endif /* SS_Bridage_h */

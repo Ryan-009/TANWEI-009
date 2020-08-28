@@ -3,6 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>com.apple.developer.associated-domains</key>
-	<array/>
+	<array>
+		<string>applinks:help.wechat.com</string>
+		<string>https://www.i-tanwei.com:8091/v1/tanwei/</string>
+	</array>
 </dict>
 </plist>

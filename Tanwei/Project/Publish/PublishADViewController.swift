@@ -16,7 +16,7 @@ class PublishADViewController: KWBaseViewController {
         let scrol = SSScrollView(frame: CGRect(x: 0, y: NavHeight, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-NavHeight))
         scrol.showsVerticalScrollIndicator = false
         scrol.showsHorizontalScrollIndicator = false
-        scrol.contentSize = CGSize(width: SCREEN_WIDTH, height: SCREEN_HEIGHT+AutoW(400))
+        scrol.contentSize = CGSize(width: SCREEN_WIDTH, height: SCREEN_HEIGHT+AutoW(50))
         return scrol
     }()
     
@@ -56,9 +56,9 @@ class PublishADViewController: KWBaseViewController {
         return tabView
     }()
     
-    fileprivate let textContentView = PublishContentView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: AutoW(200)))
+    fileprivate let textContentView = PublishContentView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: AutoW(150)))
     
-    fileprivate let imageContentView = PublishImageView(frame: CGRect(x: 0, y: AutoW(320), width: SCREEN_WIDTH, height: (SCREEN_WIDTH - AutoW(21)*2 - AutoW(8)*2)/3+AutoW(35)+AutoW(50)))
+    fileprivate let imageContentView = PublishImageView(frame: CGRect(x: 0, y: AutoW(170), width: SCREEN_WIDTH, height: (SCREEN_WIDTH - AutoW(21)*2 - AutoW(8)*2)/3+AutoW(35)+AutoW(50)))
     
     let picItemWidth : CGFloat = (SCREEN_WIDTH - AutoW(21)*2 - AutoW(8)*2)/3
     
@@ -83,15 +83,57 @@ class PublishADViewController: KWBaseViewController {
     
     private var reward : Int = 0
     private var maxReward : Int = 0
-    fileprivate var hanye = "摄像头批发"
+    fileprivate var hanye = ""
     fileprivate var address = ""
+    
+    var transmitData : contentModel = contentModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        selfInit()
+        toEditUserInfo()
+        
+//        KWUIListener.register.transmitToPublish(target: self, selector: #selector(transmitFunc))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.transmitData.cotentId != 0 {
+            transmitFunc()
+        }
+    }
+    
+    @objc private func transmitFunc(){
+        self.textContentView.textView.text = self.transmitData.cotent
+        self.textContentView.textViewDidEndEditing(self.textContentView.textView)
+        self.photos = self.transmitData.imagesForTransmit
+        self.imageContentView.pifaTextView.text = "\(self.transmitData.curPrice)"
+        self.imageContentView.yuanjiaTextView.text = "\(self.transmitData.origPrice)"
+        self.keywordTextFeild.text = self.transmitData.shopCode
+        self.imageContentView.transmitReds = self.transmitData.resId.components(separatedBy: ";")
+        self.hanye = self.transmitData.contentType
+        self.address = self.transmitData.region
+        
+//        if let cell = tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TWNormalTableViewCell {
+//            cell.contentLabel.text = self.transmitData.contentType
+//
+//        }
+//        if let cell2 = tableView.cellForRow(at: IndexPath(item: 1, section: 0)) as? TWNormalTableViewCell {
+//            cell2.contentLabel.text = self.transmitData.region
+//
+//        }
+    }
+    private func disableUserInteraction() {
+        self.keywordTextFeild.isUserInteractionEnabled = false
+        self.textContentView.textView.isUserInteractionEnabled = false
+    }
+    
+    private func selfInit() {
+       
         self.navigationItem.leftBarButtonItem = SetBackBarButtonItem(target: self, action: #selector(back), imageName: "back")
         
-        self.navigationItem.title = "编辑广告"
+        self.navigationItem.title = "发布商品"
         self.view.addSubview(scrollView)
         self.scrollView.addSubview(textContentView)
         self.scrollView.addSubview(imageContentView)
@@ -165,9 +207,16 @@ class PublishADViewController: KWBaseViewController {
             make.width.equalTo(SCREEN_WIDTH-AutoW(42))
             make.height.equalTo(AutoW(56))
         }
+        
+    }
+    
+    private func toEditUserInfo() {
+//        let vc = TanweiEditUserinfoTableViewController.init()
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func updateImageContentConst() {
+        self.scrollView.contentSize.height = SCREEN_HEIGHT + pictureViewHeight - AutoH(80)
         self.imageContentView.snp.removeConstraints()
         self.imageContentView.snp.makeConstraints { (make) in
             make.leading.equalTo(0)
@@ -183,16 +232,27 @@ class PublishADViewController: KWBaseViewController {
         vc.view.backgroundColor = UIColor.init(white: 0, alpha: 0.5)
         self.present(vc, animated: false, completion: nil)
         vc.didSelected = {city in
-            if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TWNormalTableViewCell {
+            if let cell = self.tableView.cellForRow(at: IndexPath(item: 1, section: 0)) as? TWNormalTableViewCell {
                 cell.contentLabel.text = city
                 self.address = city
             }
         }
     }
     
+    private func selectContentType() {
+        let vc = GoodsMenuViewController()
+        vc.comfirmBlock = {good in
+            if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TWNormalTableViewCell {
+                cell.contentLabel.text = good
+                self.hanye = good
+            }
+        }
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     //调取相册
     @objc func loadsystemAlbum() {
-        let listController = CPMediaListController(nibName: "", bundle: nil, type: .photo, maxCount : 15-self.photos.count)
+        let listController = CPMediaListController(nibName: "", bundle: nil, type: .photo, maxCount : 30-self.photos.count)
         let navigation = UINavigationController(rootViewController: listController)
         self.present(navigation, animated: true, completion: nil)
         listController.fetchImagesResult { (images) in
@@ -203,10 +263,66 @@ class PublishADViewController: KWBaseViewController {
     }
     
     @objc func publishFunc() {
-        publishWithImage()
+        if self.transmitData.cotentId == 0 {
+            publishWithImage()
+        }else{
+            transmitPublish()
+        }
     }
     
-    @objc func publishWithImage(){
+    @objc private func transmitPublish() {
+        
+        guard let content = self.textContentView.textView.text else {
+            KWHUD.showInfo(info: "请填写内容")
+            return
+        }
+        
+        if !UnEmpty(content) {
+            KWHUD.showInfo(info: "请填写内容")
+            return
+        }
+        
+        if self.imageContentView.pifaTextView.text == "" {
+            KWHUD.showInfo(info: "请输入批发价格")
+            return
+        }
+        
+        if self.imageContentView.yuanjiaTextView.text == "" {
+            KWHUD.showInfo(info: "请输入市场价格")
+            return
+        }
+        
+        if self.keywordTextFeild.text == ""{
+            KWHUD.showInfo(info: "请填写商品货号")
+            return
+        }
+        
+        if !UnEmpty(self.hanye) {
+            KWHUD.showInfo(info: "请选择行业")
+            return
+        }
+
+        if !UnEmpty(self.address) {
+            KWHUD.showInfo(info: "请选择发货地")
+            return
+        }
+        
+        var par : [String:Any] = [:]
+        par[KWNetworkDefine.KEY.content.rawValue]       = content
+        par[KWNetworkDefine.KEY.shopCode.rawValue]  = self.keywordTextFeild.text!
+        par[KWNetworkDefine.KEY.origPrice.rawValue] = self.imageContentView.yuanjiaTextView.text!
+        par[KWNetworkDefine.KEY.curPrice.rawValue]    = self.imageContentView.pifaTextView.text!
+        par[KWNetworkDefine.KEY.contentType.rawValue]   = self.hanye
+        par[KWNetworkDefine.KEY.contentRegion.rawValue] = self.address
+        par[KWNetworkDefine.KEY.resId.rawValue]         = self.transmitData.resId
+        Application.opration.publish(parameters: par, success: {
+            self.clearAll()
+            self.navigationController?.popViewController(animated: true)
+        }) {_ in}
+    }
+    
+    @objc private func publishWithImage(){
+        
         guard let content = self.textContentView.textView.text else {
             KWHUD.showInfo(info: "请填写内容")
             return
@@ -222,17 +338,17 @@ class PublishADViewController: KWBaseViewController {
             return
         }
         
-        guard let pifa = self.imageContentView.pifaTextView.text else {
+        if self.imageContentView.pifaTextView.text == "" {
             KWHUD.showInfo(info: "请输入批发价格")
             return
         }
         
-        guard let yuanjia = self.imageContentView.yuanjiaTextView.text else {
+        if self.imageContentView.yuanjiaTextView.text == "" {
             KWHUD.showInfo(info: "请输入市场价格")
             return
         }
         
-        guard let code = self.keywordTextFeild.text else {
+        if self.keywordTextFeild.text == ""{
             KWHUD.showInfo(info: "请填写商品货号")
             return
         }
@@ -249,9 +365,9 @@ class PublishADViewController: KWBaseViewController {
         
         var par : [String:Any] = [:]
         par[KWNetworkDefine.KEY.content.rawValue] = content
-        par[KWNetworkDefine.KEY.shopCode.rawValue]  = code
-        par[KWNetworkDefine.KEY.origPrice.rawValue] = yuanjia
-        par[KWNetworkDefine.KEY.curPrice.rawValue]    = pifa
+        par[KWNetworkDefine.KEY.shopCode.rawValue]  = self.keywordTextFeild.text!
+        par[KWNetworkDefine.KEY.origPrice.rawValue] = self.imageContentView.yuanjiaTextView.text!
+        par[KWNetworkDefine.KEY.curPrice.rawValue]    = self.imageContentView.pifaTextView.text!
         par[KWNetworkDefine.KEY.contentType.rawValue] = self.hanye
         par[KWNetworkDefine.KEY.contentRegion.rawValue] = self.address
         var uploads : [UploadImage] = []
@@ -272,14 +388,8 @@ class PublishADViewController: KWBaseViewController {
                 KWHUD.showInfo(info: "发布成功")
                 self.clearAll()
                 self.back()
-            }) {
-                SVProgressHUD.dismiss()
-                KWHUD.showInfo(info: "发布失败,请稍后再试")
-            }
-        }) {
-            SVProgressHUD.dismiss()
-            KWHUD.showInfo(info: "发布失败,请稍后再试")
-        }
+            }) {errType in}
+        }) {}
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -289,6 +399,7 @@ class PublishADViewController: KWBaseViewController {
     @objc fileprivate func back() {
         self.view.endEditing(true)
         self.tabBarController?.selectedIndex = 0
+        self.navigationController?.popViewController(animated: true)
     }
     
     fileprivate func clearAll() {
@@ -302,6 +413,7 @@ class PublishADViewController: KWBaseViewController {
         self.imageContentView.yuanjiaTextView.text = ""
         self.hanye = ""
         self.address = ""
+        transmitData = contentModel()
         if let cell = tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TWNormalTableViewCell {
             cell.contentLabel.text = ""
         }
@@ -326,6 +438,12 @@ extension PublishADViewController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TWNORMALCELLID") as! TWNormalTableViewCell
         cell.updatePublishData(indexpath: indexPath)
+        cell.hideRedpoint()
+        if indexPath.row == 0 {
+            cell.contentLabel.text = self.hanye
+        }else if indexPath.row == 1 {
+            cell.contentLabel.text = self.address
+        }
         return cell
     }
     
@@ -335,6 +453,12 @@ extension PublishADViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        citySelectFunc()
+        self.view.endEditing(false)
+        if indexPath.row == 0 {
+            selectContentType()
+        }else if indexPath.row == 1 {
+            citySelectFunc()
+        }
+        
     }
 }

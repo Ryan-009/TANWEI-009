@@ -48,7 +48,7 @@ extension KWNetworkParse {
                 if key == KWNetworkDefine.KEY.code.rawValue {
                     respond.code = value.intValue
                 }
-                
+
                 if key == KWNetworkDefine.KEY.msg.rawValue {
                     respond.msg = value.stringValue
                 }
@@ -88,7 +88,7 @@ fileprivate extension KWNetworkParse {
             respond.data        = dictionary(json: json, key: .data)
             respond.resultArray = array(json: json, key: .result)
         }
-        
+        KWPrint(respond.msg.utf8)
         respond.value = value
         return respond
     }

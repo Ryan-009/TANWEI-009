@@ -8,7 +8,7 @@
 
 import Foundation
 import Photos
-
+import UIKit
 class CPCustomMedia: NSObject, PHPhotoLibraryChangeObserver {
 
     deinit { PHPhotoLibrary.shared().unregisterChangeObserver(self) }

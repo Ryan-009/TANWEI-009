@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UIKit
 class AlertActionSheetTool { // 处理 取消按钮 + N个按钮 的点击事件
     static func showAlert(titleStr: String?, msgStr: String?, style: UIAlertController.Style = .alert, currentVC: UIViewController, cancelBtn: String = "取消", cancelHandler:((UIAlertAction) -> Void)?, otherBtns:Array<String>?, otherHandler:((Int) -> ())?) {
         //DispatchQueue.global().async{}//子线程

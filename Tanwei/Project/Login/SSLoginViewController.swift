@@ -15,7 +15,7 @@ class SSLoginViewController: UIViewController {
         let label = UILabel.init()
         label.font = UIFont.systemFont(ofSize: 27.5)
         label.textColor = ColorFromHexString("#333333")
-        label.text = "欢迎来到销售之星"
+        label.text = "欢迎来到新零售·摊位"
         return label
     }()
     
@@ -202,10 +202,12 @@ class SSLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         uiInit()
+        self.navigationItem.leftBarButtonItem = SetBackBarButtonItem(target: self, action: #selector(backFunc), imageName: "back")
     }
     
     @objc func backFunc() {
         self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     @objc func spBtnClick(button:UIButton){
         button.isSelected = !button.isSelected
@@ -272,7 +274,7 @@ extension SSLoginViewController{
             make.width.height.equalTo(30)
         }
         
-        spLabel.attributedText = getNSAttributedString(str: "我已阅读《销售之星隐私政策》")
+        spLabel.attributedText = getNSAttributedString(str: "我已阅读《摊位隐私政策》")
         spLabel.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(privateAction))
         spLabel.addGestureRecognizer(tap)
@@ -284,7 +286,7 @@ extension SSLoginViewController{
             make.height.equalTo(30)
         }
         
-        spLabel2.attributedText = getNSAttributedString2(str: "《销售之星服务协议》")
+        spLabel2.attributedText = getNSAttributedString2(str: "《摊位服务协议》")
         spLabel2.isUserInteractionEnabled = true
         let tap2 = UITapGestureRecognizer.init(target: self, action: #selector(serviceAction))
         spLabel2.addGestureRecognizer(tap2)

@@ -43,26 +43,48 @@ class KWNetworkDefine : NSObject {
         case devicecatlist      = "/devicecat/list"
         case devicecatsort      = "/devicecat/sort"
         
-        case login              = "/users/login"
-        case getIdeCode         = "/users/getIdeCode"
-        case register           = "/users/register"
-        case loginByCaptcha     = "/users/loginByCaptcha"
-        case getUser            = "/users/getUser"
         case activelist         = "/banners/active-list"
         case search             = "/contents/search"
-        case publish            = "/contents/publish"
         case allBanners         = "/banners/allBanners"
-        
-        case updateUserBaseMsg  = "/users/updateUserBaseMsg"
-        case upload             = "/res/upload"
         case searchByUser       = "/contents/searchByUser"
         case blacklist          = "/limits/get-blacklist"
         case opblacklist        = "/limits/op-blacklist"
+        
+        //------------------tanwei--------------------//
+        case getIdeCode         = "/user/getIdeCode"
+        case getUser            = "/user/getUser"
+        case login              = "/user/login"
+        case loginByCaptcha     = "/user/loginByCaptcha"
+        case register           = "/user/register"
+//        case updatePasswd       = "/user/updatePasswd"
+        case becomeAgent        = "/agent/become-agent"
+        case getAgentInfo       = "/agent/get-agent-info"
+        case allContentFactory  = "/content/all-content-factory"
+        case allContentShop     = "/content/all-content-shop"
+        case publish            = "/content/publish"
+        case getCustomer        = "/fans/get-customer"
+        case getFactory         = "/fans/get-factory"
+        case getShop            = "/fans/get-shop"
+        case addContent         = "/focus/add-content"
+        case addFactory         = "/focus/add-factory"
+        case addShop            = "/focus/add-shop"
+        case delContent         = "/focus/del-content"
+        case delFactory         = "/focus/del-factory"
+        case getContent         = "/focus/get-content"
+        case focusGetFactory    = "/focus/get-factory"
+        case focusGetShop       = "/focus/get-shop"
+        case setIdentity        = "/user/set-identity"
+        case updatePasswd       = "/user/updatePasswd"
+        case updateTokenExpire  = "/user/updateTokenExpire"
+        case upload             = "/resource/upload"
+        case updateUserBaseMsg  = "/user/updateUserBaseMsg"
+        case orderSave          = "/pay/order-save"
     }
     
     enum KEY : String {
         
-        case contentType        = "Content-Type"
+        case ContentType        = "Content-Type"
+        case contentType        = "contentType"
         case none               = ""
         case error              = "error"
         case qop                = "qop"
@@ -134,7 +156,6 @@ class KWNetworkDefine : NSObject {
         case faceidLists        = "faceidLists"
         case faceidList         = "faceidList"
         
-        
         //用户修改密码
         case oldPassword        = "oldPassword"
         //用户忘记密码修改
@@ -155,10 +176,8 @@ class KWNetworkDefine : NSObject {
         case deviceSns          = "deviceSns"
         case validate           = "validate"
         
-        
         case captcha        = "captcha"
         case userId         = "userId"
-        case userid         = "userid"
         case token          = "token"
         case data           = "data"
         case msg            = "msg"
@@ -209,6 +228,29 @@ class KWNetworkDefine : NSObject {
         case commanyAddr = "commanyAddr"
         case black_phone = "black_phone"
         case op = "op"
+        
+        //---------------------------tanwei--------------------//
+        case recommendCode  = "recommendCode"
+        case userType       = "userType"
+        case imageHead      = "imageHead"
+        case userIdFocus    = "userIdFocus"
+        case contentRegion  = "contentRegion"
+        case shopCode       = "shopCode"
+        case origPrice      = "origPrice"
+        case curPrice       = "curPrice"
+        case contentId      = "contentId"
+        case newPw          = "newPw"
+        case array          = "array"
+        case cotentId       = "cotentId"
+        case addr           = "addr"
+        case contactPhone   = "contactPhone"
+        case nickName       = "nickName"
+        case fansNum        = "fansNum"
+        case acount         = "acount"
+        case orderCode      = "orderCode"
+        case vipStatus      = "vipStatus"
+        case overTime       = "overTime"
+        case cotent         = "cotent"
     }
     
     
@@ -307,6 +349,12 @@ class KWNetworkDefine : NSObject {
             }
         }
         
+    }
+    
+    enum userType : Int {
+        case unknow = 0
+        case saler = 1
+        case wholesaler = 2
     }
 }
 

@@ -9,11 +9,10 @@
 import UIKit
 import YYText
 import MJRefresh
-import SVProgressHUD
 
 class HomeViewController: KWBaseViewController,UITableViewDelegate,UITableViewDataSource{
     
-    var adList : [contentDtoModel] = [] {
+    var contentlist : [contentModel] = [] {
         didSet{
             self.tableView.reloadData()
         }
@@ -93,6 +92,7 @@ class HomeViewController: KWBaseViewController,UITableViewDelegate,UITableViewDa
     var selectedADRowWhenShowImage = 0
     private var page = 0
     private let limit = 10
+    
     lazy var citySelectButton : UIButton = {
         let btn = UIButton(type: .custom)
         btn.frame = CGRect(x: SCREEN_WIDTH-AutoW(85)-AutoW(15), y: AutoW(10)+44, width: AutoW(85), height: AutoW(30))
@@ -131,8 +131,37 @@ class HomeViewController: KWBaseViewController,UITableViewDelegate,UITableViewDa
         let tags = ["批发商","卖家"] as [Any]
         let segmented = UISegmentedControl(items: tags)
         segmented.selectedSegmentIndex = 0
+        segmented.addTarget(self, action: #selector(segSwitch), for: .valueChanged)
         return segmented
     }()
+    
+    lazy var nil_imageView : UIImageView = {
+        let imagV = UIImageView()
+        imagV.image = UIImage(named: "tanwei_empty_img.png")
+        imagV.frame.size = CGSize(width: AutoW(155), height: AutoW(155))
+        imagV.contentMode = .scaleAspectFit
+        imagV.clipsToBounds = true
+        return imagV
+    }()
+    
+    lazy var nil_label : UILabel = {
+        let label = UILabel()
+        label.frame.size = CGSize(width: SCREEN_WIDTH, height: AutoW(40))
+        label.textColor = ColorFromHexString("#969696")
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.text = ""
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.sizeToFit()
+        return label
+    }()
+    
+    enum SalerType {
+        case wholesaler
+        case saler
+    }
+    
+    fileprivate var saleType : SalerType = .wholesaler
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -147,13 +176,14 @@ class HomeViewController: KWBaseViewController,UITableViewDelegate,UITableViewDa
     ///用于保存被点击后的图片区域
     var selectedImageView : UIImageView = UIImageView()
     var selTatalPages : Int = 0
+    var selectedGood = ""
+    var selectedCity = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         selfInit()
-//        KWSystem.loginPresent(self)
-        loadBannar()
         KWListener.register.openedApplicationService(target: self, selector: #selector(loadData))
+        loadData()
     }
     
     func selfInit() {
@@ -165,17 +195,22 @@ class HomeViewController: KWBaseViewController,UITableViewDelegate,UITableViewDa
         self.tableView.mj_header = header
         
         let footer  = MJRefreshAutoNormalFooter()
+//        footer.ignoredScrollViewContentInsetBottom = SCREEN_HEIGHT-headerView.frame.maxY - NavHeight
         footer.setRefreshingTarget(self, refreshingAction: #selector(loadMoreData))
         self.tableView.mj_footer = footer
+        
+        let data = allBannarModel()
+        data.resId = "f1ed5b3a-e08d-11ea-8bce-00163e0c20cb"
+        self.adView.bannerDataList = [data]
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return adList.count
+        return contentlist.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TEXTANDIMAGECELLID", for: indexPath) as! TextAndImageTableViewCell
-        cell.loadData(data: self.adList[indexPath.row])
+        cell.loadData(data: self.contentlist[indexPath.row])
         cell.didSelectImageblock = {[weak self](selView,selIndex,selTatalPages) in
             self?.selectedADRowWhenShowImage = indexPath.row
             self?.selectedImageView = selView
@@ -184,11 +219,16 @@ class HomeViewController: KWBaseViewController,UITableViewDelegate,UITableViewDa
         }
         cell.headerClick = {[unowned self] in
             let vc = PersonalInfoTableViewController()
-            vc.adModel = self.adList[indexPath.row]
+//            vc.adModel = self.contentlist[indexPath.row]
             self.navigationController?.pushViewController(vc, animated: true)
         }
         cell.updateBlock = {()in
             tableView.reloadRows(at: [indexPath], with: .none)
+        }
+        cell.transmitClick = {()in
+            let vc = PublishADViewController.init()
+            vc.transmitData = self.contentlist[indexPath.row]
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         cell.didSelectLinkblock = { link in
             let webVc = KWServiceViewController();
@@ -209,11 +249,10 @@ class HomeViewController: KWBaseViewController,UITableViewDelegate,UITableViewDa
                     self.present(nav, animated: true, completion: nil)
                     return
                 }
-                
                 Application.opration.resetpassword(oldPassword: "123456", password: "123456", confirmPassword: "123456", success: {
-                    SVProgressHUD.showSuccess(withStatus: "举报成功")
+                    HUD.showSuccess(withStatus: "举报成功")
                 }) {
-                    SVProgressHUD.showSuccess(withStatus: "举报成功")
+                    HUD.showSuccess(withStatus: "举报成功")
                 }
             }
         }
@@ -221,7 +260,7 @@ class HomeViewController: KWBaseViewController,UITableViewDelegate,UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.adList[indexPath.row].cellHeight
+        return self.contentlist[indexPath.row].cellHeight
     }
 
     deinit {
@@ -236,25 +275,69 @@ extension HomeViewController {
         self.present(vc, animated: false, completion: nil)
         vc.didSelected = {city in
             self.citySelectButton.setTitle(city, for: .normal)
+            self.selectedCity = city
+            self.loadData()
         }
     }
     
     @objc func professorSelectFunc() {
-        
+        let vc = GoodsMenuViewController()
+        vc.comfirmBlock = {good in
+            self.professorButton.setTitle(good, for: .normal)
+            self.selectedGood = good
+            self.loadData()
+        }
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func loadData() {
+    @objc fileprivate func segSwitch() {
+        if self.seg.selectedSegmentIndex == 0 {
+            self.saleType = .wholesaler
+        }else{
+            self.saleType = .saler
+        }
+        HUD.show()
+        loadData()
+    }
+    
+    @objc fileprivate func loadData() {
+ 
         var par : [String:Any] = [:]
+        par[KWNetworkDefine.KEY.start.rawValue] = 0
         par[KWNetworkDefine.KEY.limit.rawValue] = limit
-        par[KWNetworkDefine.KEY.start.rawValue] = page
-        Application.list.search(parameters: par, success: { (dtos) in
-            self.adList = dtos
-            self.tableView.mj_header?.endRefreshing()
-            self.tableView.mj_footer?.endRefreshing()
-            self.page = 0
-        }) {
-            self.tableView.mj_header?.endRefreshing()
-            self.tableView.mj_footer?.endRefreshing()
+        if UnEmpty(selectedGood) {
+            par[KWNetworkDefine.KEY.contentType.rawValue] = selectedGood
+        }
+        if UnEmpty(selectedCity) {
+            par[KWNetworkDefine.KEY.contentRegion.rawValue] = selectedCity
+        }
+        if self.saleType == .wholesaler {
+            Application.list.allContentFactory(parameters: par, success: {dataList in
+                self.tableView.mj_header?.endRefreshing()
+                self.tableView.mj_footer?.endRefreshing()
+                self.page = self.limit
+                self.contentlist = dataList
+                self.checkNet_break()
+                HUD.dismiss()
+            }) {
+                self.tableView.mj_header?.endRefreshing()
+                self.tableView.mj_footer?.endRefreshing()
+                self.checkNet_break()
+                HUD.dismiss()
+            }
+        }else{
+            Application.list.allContentShop(parameters: par, success: {dataList in
+                self.checkNet_break()
+                self.tableView.mj_header?.endRefreshing()
+                self.tableView.mj_footer?.endRefreshing()
+                self.contentlist = dataList
+                HUD.dismiss()
+            }) {
+                self.checkNet_break()
+                self.tableView.mj_header?.endRefreshing()
+                self.tableView.mj_footer?.endRefreshing()
+                HUD.dismiss()
+            }
         }
     }
     
@@ -262,20 +345,43 @@ extension HomeViewController {
         var par : [String:Any] = [:]
         par[KWNetworkDefine.KEY.limit.rawValue] = limit
         par[KWNetworkDefine.KEY.start.rawValue] = page
-        Application.list.search(parameters: par, success: { (dtos) in
-            self.adList.append(contentsOf: dtos)
-            self.tableView.mj_footer?.endRefreshing()
-            self.page += self.limit
-        }) {
-            self.tableView.mj_header?.endRefreshing()
-            self.tableView.mj_footer?.endRefreshing()
+        
+        if self.saleType == .wholesaler {
+            Application.list.allContentFactory(parameters: par, success: {dataList in
+                self.contentlist.append(contentsOf: dataList)
+                self.tableView.mj_header?.endRefreshing()
+                self.tableView.mj_footer?.endRefreshing()
+                self.page += self.limit
+                self.checkNet_break()
+            }) {
+                self.checkNet_break()
+                self.tableView.mj_header?.endRefreshing()
+                self.tableView.mj_footer?.endRefreshing()
+            }
+        }else{
+            Application.list.allContentShop(parameters: par, success: {dataList in
+                self.contentlist.append(contentsOf: dataList)
+                self.tableView.mj_header?.endRefreshing()
+                self.tableView.mj_footer?.endRefreshing()
+                self.page += self.limit
+                self.checkNet_break()
+            }) {
+                self.checkNet_break()
+                self.tableView.mj_header?.endRefreshing()
+                self.tableView.mj_footer?.endRefreshing()
+            }
         }
     }
     
-    func loadBannar() {
-        Application.list.allBanners(success: { (bannarList) in
-//            self.bannarList = bannarList
-            self.adView.bannerDataList = bannarList
-        }) {}
+    func checkNet_break(){
+        if self.contentlist.count == 0{
+            self.nil_imageView.center = CGPoint(x: SCREEN_WIDTH * 0.5, y: (SCREEN_HEIGHT-adView.frame.height) * 0.4 + adView.frame.height)
+            self.view.addSubview(self.nil_imageView)
+            self.nil_label.center = CGPoint(x: SCREEN_WIDTH * 0.5, y: (SCREEN_HEIGHT-adView.frame.height) * 0.56 + adView.frame.height)
+            self.view.addSubview(self.nil_label)
+        }else{
+            self.nil_label.removeFromSuperview()
+            self.nil_imageView.removeFromSuperview()
+        }
     }
 }

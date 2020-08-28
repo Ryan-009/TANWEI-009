@@ -8,9 +8,8 @@
 
 import Foundation
 import Alamofire
-import PromiseKit
 import SVProgressHUD
-
+import UIKit
 ///value在网络访问时，一般会以json数据形式，在用户数据返回时，一般会以模型形式
 typealias SuccessCallBack = (_ respond : KWNetworkRespond)->()
 
@@ -34,6 +33,13 @@ extension KWNetwork {
         request.send(config: requestConfig, success: { (respond) in
             
             let error = KWNetworkError.convertRespondErrorCodeToErrorType(code: respond.code)
+            
+            if error == .tokenInvalid {
+                KWLogin.removeLoginStatus()
+                let vc = SSLoginViewController.init()
+                let nav = KWBaseNavigationController.init(rootViewController: vc)
+                ApplicationWindow.rootViewController!.present(nav, animated: true, completion: nil)
+            }
             
             KWNetworkHandle.removeFromTasks(request: request)
             
@@ -140,7 +146,7 @@ fileprivate extension KWNetwork {
                 config.set(paramet: KWLogin.loginUser(), key: .userId)
             }
         }
-        config.set(head: DeviceInfo.getMacAddress(), key: .traceId)
+//        config.set(head: DeviceInfo.getMacAddress(), key: .traceId)
         
         return config
     }
@@ -247,31 +253,31 @@ extension KWNetwork {
     }
     public class func publishUploadImage(uploadImages:[UploadImage], success : @escaping (_ successMaterialIds : [UploadImage])->(), failure: @escaping ()->()){
 //        DispatchQueue.global().async {
-            let semaphore = DispatchSemaphore(value: 1)
-            let queue = DispatchQueue.global()
-            let group = DispatchGroup()
-            var finishNum = 0
-            for i in 0...uploadImages.count-1 {
-                queue.async(group:group) {
-                    semaphore.wait()
-                    uploadImageData(imageData: uploadImages[i].data, success: { (id) in
-                        finishNum += 1
-                        uploadImages[i].materialId = id
-                        KWPrint("i是多少:"+"\(i)")
-                        DispatchQueue.main.async {
-                            let count : CGFloat = CGFloat(uploadImages.count) + 0.0
-                            SVProgressHUD.showProgress(Float(CGFloat(i+1)/count), status: "数据上传中...")
-                        }
-                        semaphore.signal()
-                        if finishNum == uploadImages.count {
-                            success(uploadImages)
-                        }
-                    }) { (err) in
-                        failure()
-                        SVProgressHUD.dismiss()
+        let semaphore = DispatchSemaphore(value: 1)
+        let queue = DispatchQueue.global()
+        let group = DispatchGroup()
+        var finishNum = 0
+        for i in 0...uploadImages.count-1 {
+            queue.async(group:group) {
+                semaphore.wait()
+                uploadImageData(imageData: uploadImages[i].data, success: { (id) in
+                    finishNum += 1
+                    uploadImages[i].materialId = id
+                    KWPrint("i是多少:"+"\(i) id:\(id)")
+                    DispatchQueue.main.async {
+                        let count : CGFloat = CGFloat(uploadImages.count) + 0.0
+                        SVProgressHUD.showProgress(Float(CGFloat(i+1)/count), status: "数据上传中...")
                     }
+                    semaphore.signal()
+                    if finishNum == uploadImages.count {
+                        success(uploadImages)
+                    }
+                }) { (err) in
+                    failure()
+                    SVProgressHUD.dismiss()
                 }
             }
+        }
     }
     private class func uploadImage(image:UIImage,success : @escaping ((_ id : String) -> ()), failure : @escaping FailureCallBack) {
         if let data = image.jpegData(compressionQuality: 1.0) {
@@ -296,7 +302,7 @@ extension KWNetwork {
             multipartFormData.append(imageData, withName: "file",
             fileName: "file.jpeg", mimeType: "image/jpeg")
         }, to: HostPort1 + KWNetworkDefine.URL.upload.rawValue,method: .post,
-           headers:["token":KWLogin.loginToken(),"Content-Type":"multipart/form-data"], encodingCompletion: {(encodingResult) in
+           headers:["Content-Type":"multipart/form-data"], encodingCompletion: {(encodingResult) in
             switch encodingResult {
             case .success(let upload, _, _):
                 upload.responseString { (dataRespond) in
@@ -558,17 +564,18 @@ extension KWNetwork {
 
 extension KWNetwork {
     public class func getIdeCode(phone:String,type:Int,resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack) {
-           let config = postPort1(urlType: .getIdeCode)
-            config.set(paramet: phone, key: KWNetworkDefine.KEY.phone)
-            config.set(paramet: type, key: KWNetworkDefine.KEY.type)
-           sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
+        let config = postPort1(urlType: .getIdeCode)
+        config.set(paramet: phone, key: KWNetworkDefine.KEY.phone)
+        config.set(paramet: type, key: KWNetworkDefine.KEY.type)
+        sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
     }
     
-    public class func register(mobile:String,captcha:String,password:String,resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack) {
+    public class func register(mobile:String,captcha:String,password:String,recommentCode:String,resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack) {
         let config = postPort1(urlType: .register)
         config.set(paramet: captcha, key: KWNetworkDefine.KEY.captcha)
         config.set(paramet: password, key: KWNetworkDefine.KEY.password)
         config.set(paramet: mobile, key: KWNetworkDefine.KEY.phone)
+        if UnEmpty(recommentCode) {config.set(paramet: recommentCode, key: KWNetworkDefine.KEY.recommendCode)}
         sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
     }
 }
@@ -576,7 +583,7 @@ extension KWNetwork {
 extension KWNetwork {
     public class func getUser(resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
         let config = getPort1(urlType: .getUser)
-        config.set(paramet: KWLogin.loginUser(), key: .userid)
+        config.set(paramet: KWLogin.loginUser(), key: .userId)
         sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
     }
 }
@@ -588,7 +595,6 @@ extension KWNetwork {
     }
 }
 
- 
 extension KWNetwork {
     public class func search(parameters:[String:Any],resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
         let config = getPort1(urlType: .search)
@@ -640,6 +646,150 @@ extension KWNetwork {
         let config = postPort1(urlType: .opblacklist)
         config.set(paramet: op, key: .op)
         config.set(paramet: black_phone, key: .black_phone)
+        sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
+    }
+}
+
+extension KWNetwork {
+    public class func becomeAgent(account:String,resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
+        let config = postPort1(urlType: .becomeAgent)
+        config.set(paramet: account, key: .account)
+        sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
+    }
+}
+
+extension KWNetwork {
+    public class func getAgentInfo(resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
+        let config = postPort1(urlType: .getAgentInfo)
+        sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
+    }
+}
+
+extension KWNetwork {
+    public class func allContentFactory(parameters:[String:Any],resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
+        let config = postPort1(urlType: .allContentFactory)
+        config.set(parameters: parameters)
+        sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
+    }
+}
+
+extension KWNetwork {
+    
+    public class func allContentShop(parameters:[String:Any],resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
+        let config = postPort1(urlType: .allContentShop)
+        config.set(parameters: parameters)
+        sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
+    }
+}
+
+extension KWNetwork {
+    public class func getCustomer(resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
+        let config = postPort1(urlType: .getCustomer)
+        sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
+    }
+}
+
+extension KWNetwork {
+    public class func getFactory(resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
+        let config = postPort1(urlType: .getFactory)
+        sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
+    }
+}
+
+extension KWNetwork {
+    public class func getShop(resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
+        let config = postPort1(urlType: .getShop)
+        sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
+    }
+}
+
+extension KWNetwork {
+    public class func addContent(contentId:Int,resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
+        let config = postPort1(urlType: .addContent)
+        config.set(paramet: contentId, key: .contentId)
+        sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
+    }
+}
+
+extension KWNetwork {
+    public class func addFactory(userIdFocus:Int,resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
+        let config = postPort1(urlType: .addFactory)
+        config.set(paramet: userIdFocus, key: .userIdFocus)
+        sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
+    }
+}
+
+extension KWNetwork {
+    public class func addShop(userIdFocus:Int,resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
+        let config = postPort1(urlType: .addShop)
+        config.set(paramet: userIdFocus, key: .userIdFocus)
+        sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
+    }
+}
+
+extension KWNetwork {
+    public class func delContent(contentId:Int,resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
+        let config = postPort1(urlType: .delContent)
+        config.set(paramet: contentId, key: .contentId)
+        sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
+    }
+}
+
+extension KWNetwork {
+    public class func delFactory(userIdFocus:Int,resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
+        let config = postPort1(urlType: .delFactory)
+        config.set(paramet: userIdFocus, key: .userIdFocus)
+        sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
+    }
+}
+
+extension KWNetwork {
+    public class func getContent(resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
+        let config = postPort1(urlType: .getContent)
+        sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
+    }
+}
+
+extension KWNetwork {
+    public class func focusGetFactory(start:Int,limit:Int,resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
+        let config = postPort1(urlType: .focusGetFactory)
+        config.set(paramet: start, key: .start)
+        config.set(paramet: limit, key: .limit)
+        sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
+    }
+}
+
+extension KWNetwork {
+    public class func focusGetShop(start:Int,limit:Int,resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
+        let config = postPort1(urlType: .focusGetShop)
+        config.set(paramet: start, key: .start)
+        config.set(paramet: limit, key: .limit)
+        sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
+    }
+}
+
+extension KWNetwork {
+    public class func setIdentity(userType:Int,resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
+        let config = postPort1(urlType: .setIdentity)
+        config.set(paramet: userType, key: .userType)
+        sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
+    }
+}
+
+extension KWNetwork {
+    public class func updatePasswd(phone:String,captcha:String,newPw:String,resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
+        let config = postPort1(urlType: .updatePasswd)
+        config.set(paramet: phone, key: .phone)
+        config.set(paramet: captcha, key: .captcha)
+        config.set(paramet: newPw, key: .newPw)
+        sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
+    }
+}
+
+extension KWNetwork {
+    public class func orderSave(orderCode:String,resendConfig:KWNetworkResendConfig?,success : @escaping SuccessCallBack, failure : @escaping FailureCallBack){
+        let config = postPort1(urlType: .orderSave)
+        config.set(paramet: orderCode, key: .orderCode)
         sendRequest(requestConfig: config, resendConfig: resendConfig, success: success, failure: failure)
     }
 }

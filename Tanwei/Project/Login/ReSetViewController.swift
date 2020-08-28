@@ -250,7 +250,7 @@ extension ReSetViewController{
             make.width.height.equalTo(30)
         }
         
-        spLabel.attributedText = getNSAttributedString(str: "我已阅读《销售之星隐私政策》")
+        spLabel.attributedText = getNSAttributedString(str: "我已阅读《摊位隐私政策》")
         spLabel.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(privateAction))
         spLabel.addGestureRecognizer(tap)
@@ -262,7 +262,7 @@ extension ReSetViewController{
             make.height.equalTo(30)
         }
         
-        spLabel2.attributedText = getNSAttributedString2(str: "《销售之星服务协议》")
+        spLabel2.attributedText = getNSAttributedString2(str: "《摊位服务协议》")
         spLabel2.isUserInteractionEnabled = true
         let tap2 = UITapGestureRecognizer.init(target: self, action: #selector(serviceAction))
         spLabel2.addGestureRecognizer(tap2)

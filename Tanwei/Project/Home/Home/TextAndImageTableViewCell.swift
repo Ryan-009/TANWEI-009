@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import YYText
 import Kingfisher
 import SVProgressHUD
+
 let SingelADImageCellWidth : CGFloat = (SCREEN_WIDTH - AutoW(15)*2 - 2*AutoW(8)) / 3
 let SHOWORHIDEBUTTONHEIGHT : CGFloat = 20
 let ContentNumberOfLines : Int = 5
@@ -24,6 +24,7 @@ class TextAndImageTableViewCell: UITableViewCell {
         icon.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(headerClickFunc))
         icon.addGestureRecognizer(tap)
+        icon.backgroundColor = APPGrayBackGroundColor
         return icon
     }()
     
@@ -129,7 +130,6 @@ class TextAndImageTableViewCell: UITableViewCell {
         return lab
     }()
     
-    
     let edge = AutoW(8)
     lazy var allOrHideTextButton : UIButton = {
         let btn = UIButton(type: .system)
@@ -141,7 +141,7 @@ class TextAndImageTableViewCell: UITableViewCell {
     lazy var shareButton : UIButton = {
         let btn = UIButton(type: .custom)
         btn.setImage(UIImage(named: "tanwei_share_products_icon"), for: .normal)
-        btn.addTarget(self, action: #selector(copyNumberFunc), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(transmit), for: .touchUpInside)
         return btn
     }()
     
@@ -162,7 +162,7 @@ class TextAndImageTableViewCell: UITableViewCell {
         btn.backgroundColor = APPSubjectColor
         btn.layer.cornerRadius = AutoW(15)
         btn.clipsToBounds = true
-        btn.addTarget(self, action: #selector(copyNumberFunc), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(transmit), for: .touchUpInside)
         return btn
     }()
     
@@ -181,19 +181,18 @@ class TextAndImageTableViewCell: UITableViewCell {
     }()
     
     lazy var pifaLogo : UIImageView = {
-        let imageView = UIImageView(image: UIImage(named:"tanwei_saler_vip_medal_icon"))
-        
+        let imageView = UIImageView(image: UIImage(named:""))
         
         return imageView
     }()
     
-    
     public var didSelectImageblock:((UIImageView,Int,Int)->Void)?
     public var didSelectLinkblock:((String)->Void)?
-    var data : contentDtoModel?
+    var data : contentModel = contentModel()
     var updateBlock:(()->Void)?
     var headerClick:(()->Void)?
     var jubaoClick:(()->Void)?
+    var transmitClick:(()->Void)?
     var imgResIds : [String] = [] {
         didSet{
             self.collectionView.reloadData()
@@ -276,26 +275,18 @@ class TextAndImageTableViewCell: UITableViewCell {
             make.leading.equalTo(newPriceLabel.snp.trailing).offset(AutoW(6.5))
         }
         
-        self.addSubview(shareButton)
-        shareButton.snp.makeConstraints { (make) in
-            make.trailing.equalToSuperview()
-            make.width.height.equalTo(AutoW(50))
-            make.centerY.equalTo(newPriceLabel)
-        }
+//        self.addSubview(shareButton)
+//        shareButton.snp.makeConstraints { (make) in
+//            make.trailing.equalToSuperview()
+//            make.width.height.equalTo(AutoW(50))
+//            make.centerY.equalTo(newPriceLabel)
+//        }
         
-        self.addSubview(copyNumberButton)
-        copyNumberButton.snp.makeConstraints { (make) in
-            make.centerY.equalTo(shareButton)
-            make.trailing.equalTo(shareButton.snp.leading).offset(AutoW(-5))
-        }
-        
-        self.addSubview(zfButton)
-        zfButton.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(AutoW(-20))
-            make.height.equalTo(AutoW(30))
-            make.width.equalTo(AutoW(200))
-        }
+//        self.addSubview(copyNumberButton)
+//        copyNumberButton.snp.makeConstraints { (make) in
+//            make.centerY.equalTo(shareButton)
+//            make.trailing.equalTo(shareButton.snp.leading).offset(AutoW(-5))
+//        }
         
         self.addSubview(pifaLogo)
         pifaLogo.snp.makeConstraints { (make) in
@@ -318,14 +309,16 @@ class TextAndImageTableViewCell: UITableViewCell {
 //        }
     }
     
-    func loadData(data:contentDtoModel) {
+    func loadData(data:contentModel) {
         self.data = data
-        self.iconView.kf.setImage(with: URL(string: smallImageUrl+data.image), placeholder: PlaceHolderForUserHeader, options: nil, progressBlock: nil) { (image, error, type, url) in}
+        self.iconView.kf.setImage(with: URL(string: smallImageUrl+data.imageHead), placeholder: PlaceHolderForUserHeader, options: nil, progressBlock: nil) { (image, error, type, url) in}
         
-        self.nameLabel.text = data.username
-
-        self.imgResIds = data.imgResIds.components(separatedBy: ";")
-        if data.imgResIds != "" {
+        self.nameLabel.text = data.userName
+        self.oldPriceLabel.text = "¥ \(data.origPrice)"
+        self.newPriceLabel.text = "批发价: ¥\(data.curPrice)"
+        
+        self.imgResIds = data.resId.components(separatedBy: ";")
+        if data.resId != "" {
             collectionView.snp.updateConstraints { (make) in
                 make.top.equalTo(allOrHideTextButton.snp.bottom).offset(AutoW(15))
                 make.height.equalTo(SingelADImageCellWidth)
@@ -354,24 +347,53 @@ class TextAndImageTableViewCell: UITableViewCell {
                 make.height.equalTo(0)
             }
         }
-        self.contentTextLabel.text = data.content
+        self.contentTextLabel.text = data.cotent
+        if data.fansNum < 1000 {
+            self.jobPositionAndComAddr.text = "粉丝数:<1000"
+        }else{
+            self.jobPositionAndComAddr.text = "粉丝数:\(data.fansNum)"
+        }
         
+        if KWUser.userInfo.userType == 1 && self.data.userType == .wholesaler{
+            self.addSubview(zfButton)
+            zfButton.snp.makeConstraints { (make) in
+                make.centerX.equalToSuperview()
+                make.bottom.equalTo(AutoW(-20))
+                make.height.equalTo(AutoW(30))
+                make.width.equalTo(AutoW(200))
+            }
+        }else{
+            zfButton.removeFromSuperview()
+        }
+        
+        if data.userType == .saler {
+            self.pifaLogo.image = UIImage(named: "tanwei_saler_vip_medal_icon")
+        }else if data.userType == .wholesaler {
+            self.pifaLogo.image = UIImage(named: "tanwei_wholesaler_vip_medal_icon")
+        }
     }
     
     @objc private func showOrHideFunc(sender:UIButton) {
         if sender.titleLabel?.text == "全文" {
             sender.setTitle("收起", for: .normal)
-            self.data?.showAll = true
+            self.data.showAll = true
         }else if sender.titleLabel?.text == "收起" {
             sender.setTitle("全文", for: .normal)
-            self.data?.showAll = false
+            self.data.showAll = false
         }
         if UnNil(updateBlock) {updateBlock!()}
     }
     
     @objc private func copyNumberFunc(sender:UIButton) {
-           UIPasteboard.general.string = "banana"
+        UIPasteboard.general.string = "\(self.data.shopCode)"
            KWHUD.showInfo(info: "复制成功")
+    }
+    
+    //
+    @objc private func transmit() {
+        if UnNil(transmitClick) {
+            transmitClick!()
+        }
     }
     
     @objc func headerClickFunc() {
@@ -388,7 +410,26 @@ class TextAndImageTableViewCell: UITableViewCell {
     
     @objc func likeClick(btn:UIButton) {
         btn.isSelected = !btn.isSelected
-
+        btn.isEnabled = false
+        HUD.show()
+        if btn.isSelected {
+            Application.opration.addFactory(userIdFocus: self.data.userId, success: {
+                KWHUD.showInfo(info: "关注成功")
+                btn.isEnabled = true
+            }) {
+                KWHUD.showInfo(info: "发生错误")
+                btn.isEnabled = true
+            }
+        }else {
+            Application.opration.delFactory(userIdFocus: self.data.userId, success: {
+                KWHUD.showInfo(info: "取消关注成功")
+                btn.isEnabled = true
+            }) {
+                KWHUD.showInfo(info: "发生错误")
+                btn.isEnabled = true
+            }
+        }
+        
     }
     
     @objc func contactFunc() {
@@ -398,40 +439,40 @@ class TextAndImageTableViewCell: UITableViewCell {
             return
         }
         
-        if self.data?.cPhone == "" {
-            self.data?.cPhone = self.data?.phone ?? ""
+        if self.data.contactPhone == "" {
+            self.data.contactPhone = self.data.contactPhone
         }
-        if UnEmpty(self.data?.cPhone) && UnEmpty(self.data?.wechatId) {
+        if UnEmpty(self.data.contactPhone) && self.data.wechatId != "" {
             AlertActionSheetTool.showAlert(titleStr: "", msgStr: "选择联系方式", currentVC: ApplicationWindow.rootViewController!, cancelHandler: { (action) in
-                
+
             }, otherBtns: ["拨打电话号码","点击复制微信号"]) { (index) in
                 if index == 0 {
-                    let phone = "telprompt://" + self.data!.cPhone
+                    let phone = "telprompt://" + self.data.contactPhone
                     if UIApplication.shared.canOpenURL(URL(string: phone)!) {
                          UIApplication.shared.openURL(URL(string: phone)!)
                     }
                 }else if index == 1 {
-                    UIPasteboard.general.string = self.data?.wechatId
+                    UIPasteboard.general.string = "\(self.data.wechatId)"
                     KWHUD.showInfo(info: "复制成功")
                 }
             }
-        }else if UnEmpty(self.data?.cPhone) {
+        }else if UnEmpty(self.data.contactPhone) {
             AlertActionSheetTool.showAlert(titleStr: "", msgStr: "联系方式", currentVC: ApplicationWindow.rootViewController!, cancelHandler: { (action) in
-                
+
             }, otherBtns: ["拨打电话号码"]) { (index) in
                 if index == 0 {
-                    let phone = "telprompt://" + self.data!.cPhone
+                    let phone = "telprompt://" + self.data.contactPhone
                     if UIApplication.shared.canOpenURL(URL(string: phone)!) {
                          UIApplication.shared.openURL(URL(string: phone)!)
                     }
                 }
             }
-        }else if UnEmpty(self.data?.wechatId) {
+        }else if self.data.wechatId != "" {
             AlertActionSheetTool.showAlert(titleStr: "", msgStr: "联系方式", currentVC: ApplicationWindow.rootViewController!, cancelHandler: { (action) in
-                
+
             }, otherBtns: ["点击复制微信号"]) { (index) in
                 if index == 0 {
-                    UIPasteboard.general.string = self.data?.wechatId
+                    UIPasteboard.general.string = "\(self.data.wechatId)"
                     KWHUD.showInfo(info: "复制成功")
                 }
             }
@@ -449,7 +490,9 @@ extension TextAndImageTableViewCell : UICollectionViewDelegate,UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PUBLISHPICTURECELLID", for: indexPath) as! ADPictureCell
-        cell.customIconImageView.kf.setImage(with: URL(string: smallImageUrl + self.imgResIds[indexPath.row]))
+//        cell.customIconImageView.kf.setImage(with: URL(string: smallImageUrl + "00f88fe1-e15b-11ea-8426-001"))
+        cell.customIconImageView.kf.setImage(with: URL(string: smallImageUrl + self.imgResIds[indexPath.row]), placeholder: PlaceHolderForPreLoad, options: nil, progressBlock: nil) { (image, error, type, url) in}
+//        cell.contentView.backgroundColor = .lightGray
         return cell
     }
     
@@ -483,7 +526,7 @@ class ADPictureCell: UICollectionViewCell {
     //懒加载imageView
     lazy var customIconImageView :UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = UIView.ContentMode.scaleAspectFit
+        imageView.contentMode = UIView.ContentMode.scaleToFill
         imageView.clipsToBounds = true
         imageView.sizeToFit()
         return imageView

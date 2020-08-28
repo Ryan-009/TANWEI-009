@@ -23,6 +23,8 @@ enum KWUIListenerKey : String {
     case catIndexUpdate              = "LISTENER_KEY_DEVICECAT_CATINDEXUPDATE"
     //接受消息后刷新界面
     case reloadDataAfterGetSate      = "LISTENER_KEY_RELOADDATA_AFTERGETSTATE"
+    //一键转发
+    case transmitToPublish          = "LISTENER_KEY_TRANSMIT_PUBLISH"
 }
 
 class KWUIListener: NSObject {
@@ -78,6 +80,9 @@ class KWUIListenerRegister : KWUIListenerHandle {
     internal func reloadDataAfterGetSate(target: Any, selector : Selector) {
         addCustomObserver(observer: target, selector: selector, key: .reloadDataAfterGetSate)
     }
+    internal func transmitToPublish(target: Any, selector : Selector) {
+        addCustomObserver(observer: target, selector: selector, key: .transmitToPublish)
+    }
 }
 
 //MARK : 移除监听
@@ -104,6 +109,9 @@ class KWUIListenerRemover : KWUIListenerHandle {
     internal func reloadDataAfterGetSate(target : Any) {
         removeCustomObserver(observer: target, key: .reloadDataAfterGetSate)
     }
+    internal func transmitToPublish(target : Any) {
+        removeCustomObserver(observer: target, key: .transmitToPublish)
+    }
 }
 
 //MARK : 发送监听
@@ -129,6 +137,9 @@ class KWUIListenerPoster : KWUIListenerHandle {
     }
     internal func reloadDataAfterGetSate() {
         postCustomObserver(key: .reloadDataAfterGetSate)
+    }
+    internal func transmitToPublish(userInfo:[String:Any]) {
+        postCustomObserverWithUserInfo(key: .transmitToPublish, userInfo: userInfo)
     }
 }
 

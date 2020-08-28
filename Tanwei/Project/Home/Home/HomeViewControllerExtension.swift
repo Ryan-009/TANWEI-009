@@ -72,7 +72,7 @@ extension HomeViewController:PhotoBrowserDelegate{
    
     @objc func showImage(index:Int,total:Int) {
         let photoBrowser = PhotoBrowser(showByViewController: self, delegate: self)
-        photoBrowser.resId = self.adList[selectedADRowWhenShowImage].imgResIds
+        photoBrowser.resId = self.contentlist[selectedADRowWhenShowImage].resId
         // 装配PageControl，提供了两种PageControl实现，若需要其它样式，可参照着自由定制
         photoBrowser.pageControlDelegate = PhotoBrowserDefaultPageControlDelegate(numberOfPages:total)
         photoBrowser.show(index: index)
@@ -93,7 +93,7 @@ extension HomeViewController:PhotoBrowserDelegate{
     
     func photoBrowser(_ photoBrowser: PhotoBrowser, highQualityUrlStringForIndex index: Int) -> URL? {
         
-        let imgResIds = self.adList[selectedADRowWhenShowImage].imgResIds.components(separatedBy: ";")
+        let imgResIds = self.contentlist[selectedADRowWhenShowImage].resId.components(separatedBy: ";")
         if imgResIds.count > index {
             return URL(string: ImageBaseURL + imgResIds[index])
         }

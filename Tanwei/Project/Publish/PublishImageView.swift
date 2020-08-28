@@ -50,6 +50,8 @@ class PublishImageView: UIView {
             self.collectionView.reloadData()
         }
     }
+    var transmitReds : [String] = []
+    
     public var itemCickBlock : ((Int)->Void)?
     public var itemDidMove : (([UIImage])->Void)?
     public var itemDeleteBlock : ((Int)->Void)?
@@ -156,49 +158,63 @@ class PublishImageView: UIView {
 
 extension PublishImageView : UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photoArr.count + 1
+        return transmitReds.count > 0 ? transmitReds.count : photoArr.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PUBLISHPICTURECELLID", for: indexPath) as! PublishPictureCell
-        if indexPath.row == photoArr.count {
-            cell.contentView.backgroundColor = UIColor.init(red: 218/255, green: 218/255, blue: 218/255, alpha: 1)
-            cell.customIconImageView.image = UIImage(named: "+icon")
-            cell.deleteButton.isHidden = true
+        if transmitReds.count == 0 {
+            if indexPath.row == photoArr.count {
+                cell.contentView.backgroundColor = UIColor.init(red: 218/255, green: 218/255, blue: 218/255, alpha: 1)
+                cell.customIconImageView.image = UIImage(named: "+icon")
+                cell.deleteButton.isHidden = true
+            }else{
+                cell.contentView.backgroundColor = UIColor.white
+                cell.customIconImageView.image = photoArr[indexPath.row]
+                cell.deleteButton.isHidden = false
+                cell.deleteButton.tag = indexPath.row
+                cell.deleteButton.addTarget(self, action: #selector(deleteFunc), for: .touchUpInside)
+            }
         }else{
-            cell.contentView.backgroundColor = UIColor.white
-            cell.customIconImageView.image = photoArr[indexPath.row]
-            cell.deleteButton.isHidden = false
-            cell.deleteButton.tag = indexPath.row
-            cell.deleteButton.addTarget(self, action: #selector(deleteFunc), for: .touchUpInside)
+            cell.customIconImageView.kf.setImage(with: URL(string: smallImageUrl + self.transmitReds[indexPath.row]))
         }
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == photoArr.count {
-            if itemCickBlock != nil {
-                itemCickBlock!(indexPath.row)
+        if transmitReds.count == 0 {
+            if indexPath.row == photoArr.count {
+                if itemCickBlock != nil {
+                    itemCickBlock!(indexPath.row)
+                }
+            }else{
+                collectionView.reloadData()
             }
-        }else{
-            collectionView.reloadData()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
-        if indexPath.item == photoArr.count {return false}
-        return true
+        if transmitReds.count == 0 {
+            if indexPath.item == photoArr.count {return false}
+            return true
+        }
+        return false
     }
     
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let tempCell = photoArr.remove(at: sourceIndexPath.item)
-        photoArr.insert(tempCell, at: destinationIndexPath.item)
-        if UnNil(itemDidMove) {
-            itemDidMove!(photoArr)
+        if transmitReds.count == 0 {
+            let tempCell = photoArr.remove(at: sourceIndexPath.item)
+            photoArr.insert(tempCell, at: destinationIndexPath.item)
+            if UnNil(itemDidMove) {
+                itemDidMove!(photoArr)
+            }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, targetIndexPathForMoveFromItemAt originalIndexPath: IndexPath, toProposedIndexPath proposedIndexPath: IndexPath) -> IndexPath {
+
         if proposedIndexPath.row == photoArr.count {
             return originalIndexPath
         }
@@ -206,8 +222,10 @@ extension PublishImageView : UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     @objc func deleteFunc(btn:UIButton) {
-        if UnNil(itemDeleteBlock) {
-            itemDeleteBlock!(btn.tag)
+        if transmitReds.count == 0 {
+            if UnNil(itemDeleteBlock) {
+                itemDeleteBlock!(btn.tag)
+            }
         }
     }
 }

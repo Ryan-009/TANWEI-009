@@ -14,9 +14,16 @@ import Foundation
 //let ImageBaseURL        : String        = "http://120.79.53.247/res/download?resId="
 //let smallImageUrl       : String        = "http://120.79.53.247/res/downloadSmallImg?resId="
 /*************************************** 测试环境 ****************************************/
-let HostPort1           : String        = "http://120.79.53.247:8080/v1"
-let ImageBaseURL        : String        = "http://120.79.53.247:8080/v1/res/download?resId="
-let smallImageUrl       : String        = "http://120.79.53.247:8080/v1/res/downloadSmallImg?resId="
+//let HostPort1           : String        = "http://120.79.53.247:8080/v1"
+//let ImageBaseURL        : String        = "http://120.79.53.247:8080/v1/res/download?resId="
+//let smallImageUrl       : String        = "http://120.79.53.247:8080/v1/res/downloadSmallImg?resId="
 /*************************************** 正式环境****************************************/
 //let HostPort1           : String   = ""
 //let ImageBaseURL        : String   = ""
+
+
+
+/*************************************** TANWEI****************************************/
+let HostPort1           : String        = "https://www.i-tanwei.com:8091/v1"
+let ImageBaseURL        : String        = "https://www.i-tanwei.com:8091/v1/resource/download?resId="
+let smallImageUrl       : String        = "https://www.i-tanwei.com:8091/v1/resource/downloadSmallImg?resId="

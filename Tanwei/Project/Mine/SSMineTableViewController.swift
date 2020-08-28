@@ -73,21 +73,36 @@ class SSMineTableViewController: KWBaseTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if indexPath.section == 0 {
-            let vc = PersonalInfoTableViewController()
+            let vc = TanweiEditUserinfoTableViewController.init()
             self.navigationController?.pushViewController(vc, animated: true)
         }
+        
         if indexPath.section == 1 {
             if indexPath.row == 0 {
-                let vc = TWPayDetailTableViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
+                if KWUser.userInfo.userType == 0 {
+                    KWHUD.showInfo(info: "请先在个人信息选择您的身份")
+                }else{
+                    let vc = TWPayDetailTableViewController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                
             }else if indexPath.row == 1 {
-                let vc = KWBecomeAgentViewController()
-                vc.view.backgroundColor = UIColor.init(white: 0, alpha: 0.5)
-                DispatchQueue.main.async {
-                    self.present(vc, animated: false, completion: nil)
+                HUD.show()
+                Application.list.getAgentInfo(success: {data in
+                    let vc = KWBecomeAgentViewController()
+                    vc.data = data
+                    vc.view.backgroundColor = UIColor.init(white: 0, alpha: 0.5)
+                    DispatchQueue.main.async {
+                        self.present(vc, animated: false, completion: nil)
+                    }
+                    HUD.dismiss()
+                }) {
+                    HUD.showInfo(withStatus: "发生错误")
                 }
             }
+            
         }else if indexPath.section == 2 {
             if indexPath.row == 1 {
                 let vc = SetViewController()

@@ -11,6 +11,7 @@ import SwiftyJSON
 enum customType : Int {
     case profession = 0
     case city = 1
+    case goods = 2
 }
 
 class CustomLevelsPickerViewController: UIViewController {
@@ -146,8 +147,19 @@ class CustomLevesPickerView: UIView ,UITableViewDelegate,UITableViewDataSource{
             if let array = NSArray(contentsOfFile: Bundle.main.path(forResource: "ProvincesAndCities", ofType: "plist")!) {
                 self.provinces = array as! [Any]
             }
-        }else{
+        }else if self.type == .profession{
             let path = Bundle.main.path(forResource: "industry_division", ofType: "json")
+            let url = URL(fileURLWithPath: path!)
+            // 带throws的方法需要抛异常
+            do {
+                let data = try Data(contentsOf: url)
+                let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+                self.professions = jsonData as! [Dictionary]
+            } catch let error as Error? {
+                print("读取本地数据出现错误!",error!)
+            }
+        }else if self.type == .goods {
+            let path = Bundle.main.path(forResource: "goods_classification", ofType: "json")
             let url = URL(fileURLWithPath: path!)
             // 带throws的方法需要抛异常
             do {
@@ -165,7 +177,11 @@ class CustomLevesPickerView: UIView ,UITableViewDelegate,UITableViewDataSource{
             if let dic = provinces[row] as? NSDictionary {
                 return dic["State"] as! String
             }
-        }else{
+        }else if self.type == .profession{
+            if let dic  = professions[row] as? [String:Any] {
+                return KWParse.string(dic, key: "label_0")
+            }
+        }else if self.type == .goods{
             if let dic  = professions[row] as? [String:Any] {
                 return KWParse.string(dic, key: "label_0")
             }

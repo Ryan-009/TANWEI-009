@@ -87,7 +87,7 @@ class SetViewController: KWBaseViewController,UITableViewDelegate,UITableViewDat
     }
     
     @objc func loginOutClick() {
-        let alertVC = UIAlertController(title:"提示",message:"确认退出销售之星?",preferredStyle: UIAlertController.Style.alert )
+        let alertVC = UIAlertController(title:"提示",message:"确认退出摊位?",preferredStyle: UIAlertController.Style.alert )
         let alertAction = UIAlertAction(title: "取消",style: UIAlertAction.Style.default,handler: { action in
             self.tableView.reloadData()
         })

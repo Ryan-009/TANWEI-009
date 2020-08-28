@@ -29,26 +29,49 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="o4K-tv-9kp">
-                        <rect key="frame" x="15" y="44" width="117" height="32"/>
-                        <segments>
-                            <segment title="批发商"/>
-                            <segment title="卖家"/>
-                        </segments>
-                    </segmentedControl>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X4D-1w-sTc">
+                        <rect key="frame" x="15" y="40" width="80" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="1m7-Ua-SfR"/>
+                            <constraint firstAttribute="height" constant="35" id="FcT-WG-Jx7"/>
+                        </constraints>
+                        <state key="normal" title="批发商">
+                            <color key="titleColor" red="0.16473040799999999" green="0.16473040799999999" blue="0.16473040799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <state key="selected" title="批发商">
+                            <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FOu-F0-Ozx">
+                        <rect key="frame" x="115" y="40" width="80" height="35"/>
+                        <state key="normal" title="Button"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(提示:身份确认之后不可修改)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYm-jq-svj">
+                        <rect key="frame" x="133" y="11.5" width="160" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="FOu-F0-Ozx" firstAttribute="height" secondItem="X4D-1w-sTc" secondAttribute="height" id="29A-G5-SQI"/>
                     <constraint firstItem="J3z-FJ-UVe" firstAttribute="leading" secondItem="pSP-hn-bI3" secondAttribute="trailing" constant="5" id="2ch-FK-jrr"/>
                     <constraint firstItem="pSP-hn-bI3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="7ji-Ns-Fyh"/>
-                    <constraint firstItem="o4K-tv-9kp" firstAttribute="leading" secondItem="pSP-hn-bI3" secondAttribute="leading" id="cgO-dW-fFF"/>
+                    <constraint firstItem="cYm-jq-svj" firstAttribute="centerY" secondItem="J3z-FJ-UVe" secondAttribute="centerY" id="Ocs-eT-BRf"/>
+                    <constraint firstAttribute="bottom" secondItem="X4D-1w-sTc" secondAttribute="bottom" constant="15" id="bUX-m7-Bmx"/>
                     <constraint firstItem="J3z-FJ-UVe" firstAttribute="centerY" secondItem="pSP-hn-bI3" secondAttribute="centerY" id="cmt-6k-cmp"/>
                     <constraint firstItem="pSP-hn-bI3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="cz4-pe-FDb"/>
-                    <constraint firstAttribute="bottom" secondItem="o4K-tv-9kp" secondAttribute="bottom" constant="15" id="und-sF-qPB"/>
+                    <constraint firstItem="FOu-F0-Ozx" firstAttribute="centerY" secondItem="X4D-1w-sTc" secondAttribute="centerY" id="gyj-IR-9hc"/>
+                    <constraint firstItem="FOu-F0-Ozx" firstAttribute="leading" secondItem="X4D-1w-sTc" secondAttribute="trailing" constant="20" id="m34-Ar-L5C"/>
+                    <constraint firstItem="X4D-1w-sTc" firstAttribute="leading" secondItem="pSP-hn-bI3" secondAttribute="leading" id="oTz-yc-be2"/>
+                    <constraint firstItem="FOu-F0-Ozx" firstAttribute="width" secondItem="X4D-1w-sTc" secondAttribute="width" id="ppY-yW-c7x"/>
+                    <constraint firstItem="cYm-jq-svj" firstAttribute="leading" secondItem="J3z-FJ-UVe" secondAttribute="trailing" constant="5" id="uQw-Jj-1ix"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="selectIDSegment" destination="o4K-tv-9kp" id="n7Z-FL-3Sb"/>
+                <outlet property="maijiaButton" destination="FOu-F0-Ozx" id="MaZ-PV-Ca6"/>
+                <outlet property="pifaButton" destination="X4D-1w-sTc" id="OYF-ed-LBT"/>
             </connections>
             <point key="canvasLocation" x="177.536231884058" y="109.15178571428571"/>
         </tableViewCell>

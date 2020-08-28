@@ -91,7 +91,7 @@ class PersonalInfoTableViewController: KWBaseTableViewController {
             self.adModel.region = KWUser.userInfo.location
             self.adModel.jobPosition = KWUser.userInfo.jobPosition
             self.adModel.cPhone = KWUser.userInfo.cPhone
-            self.adModel.wechatId = KWUser.userInfo.wechatId
+            self.adModel.wechatId = "KWUser.userInfo.wechatId"
         }else{
             self.navigationItem.rightBarButtonItem = SetRightBarButtonItem(imageName: "", title: "拉黑", textColor: .black, target: self, action: #selector(blackFunc))
         }
@@ -175,7 +175,7 @@ class PersonalInfoTableViewController: KWBaseTableViewController {
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "TEXTIMAGECELLID", for: indexPath) as! TextAndImageTableViewCell
-            cell.loadData(data: self.adList[indexPath.row])
+//            cell.loadData(data: self.adList[indexPath.row])
             cell.didSelectImageblock = {[weak self](selView,selIndex,selTatalPages) in
                 self?.selectedADRowWhenShowImage = indexPath.row
                 self?.selectedImageView = selView

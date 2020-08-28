@@ -227,7 +227,7 @@ extension KWParseTask {
         var lists : Array<contentDtoModel> = Array()
         let array = KWParse.array(list, key: KWNetworkDefine.KEY.contentDtoList.rawValue)
         for objJson in array {
-            
+
             if let dic = objJson.dictionary {
                 let listsMode = contentDtoModel()
                 listsMode.companyPortal       = KWParse.string(dic, key: KWNetworkDefine.KEY.companyPortal.rawValue)
@@ -278,9 +278,9 @@ extension KWParseTask {
                     normalHeight = normalHeight + SHOWORHIDEBUTTONHEIGHT
                 }
                 //头像变大8px,暂时这里加上
-                maxHeight += AutoW(8)
-                normalHeight += AutoW(8)
-                
+                maxHeight += AutoW(8) + AutoW(30)
+                normalHeight += AutoW(8) + AutoW(30)
+
                 listsMode.cellMaxHeight = maxHeight
                 listsMode.cellNormalHeight = normalHeight
                 listsMode.cellHeight = normalHeight
@@ -294,12 +294,175 @@ extension KWParseTask {
                     author.userId = KWParse.string(authorDic, key: KWNetworkDefine.KEY.userId.rawValue)
                     listsMode.author = author
                 }
-                        
+
                 lists.append(listsMode)
             }
-            
         }
         return lists
+    }
+    
+    internal class func allContentFactory(list : Dictionary<String,JSON>) -> Array<contentModel> {
+        var lists : Array<contentModel> = Array()
+        let array = KWParse.array(list, key: KWNetworkDefine.KEY.array.rawValue)
+        for objJson in array {
+            if let dic = objJson.dictionary {
+                let objc = contentModel()
+                objc.cotent = KWParse.string(dic, key: KWNetworkDefine.KEY.cotent.rawValue)
+                objc.region = KWParse.string(dic, key: KWNetworkDefine.KEY.region.rawValue)
+                objc.resId = KWParse.string(dic, key: KWNetworkDefine.KEY.resId.rawValue)
+                objc.cotentId = KWParse.int(dic, key: KWNetworkDefine.KEY.cotentId.rawValue)
+                objc.curPrice = KWParse.int(dic, key: KWNetworkDefine.KEY.curPrice.rawValue)
+                objc.origPrice = KWParse.int(dic, key: KWNetworkDefine.KEY.origPrice.rawValue)
+                objc.userId = KWParse.int(dic, key: KWNetworkDefine.KEY.userId.rawValue)
+                objc.addr = KWParse.string(dic, key: KWNetworkDefine.KEY.addr.rawValue)
+                objc.contactPhone = KWParse.string(dic, key: KWNetworkDefine.KEY.contactPhone.rawValue)
+                objc.imageHead = KWParse.string(dic, key: KWNetworkDefine.KEY.imageHead.rawValue)
+                objc.userName = KWParse.string(dic, key: KWNetworkDefine.KEY.userName.rawValue)
+                objc.wechatId = KWParse.string(dic, key: KWNetworkDefine.KEY.wechatId.rawValue)
+                objc.shopCode = KWParse.string(dic, key: KWNetworkDefine.KEY.shopCode.rawValue)
+                objc.contentType = KWParse.string(dic, key: KWNetworkDefine.KEY.contentType.rawValue)
+                objc.fansNum = KWParse.int(dic, key: KWNetworkDefine.KEY.fansNum.rawValue)
+                objc.userType = .wholesaler
+                var maxHeight : CGFloat = 0
+                var normalHeight : CGFloat = 0
+                let realTextHeight = GetLabHeigh(labelStr: objc.cotent, font: UIFont.systemFont(ofSize: 15), width: SCREEN_WIDTH-AutoW(30))
+                
+                //当有图片内容时，加上图片高度
+                if objc.resId != "" {
+                    //内容少于5行情况
+                    if realTextHeight < NormalTextMaxHeight {
+                        maxHeight = realTextHeight + SingelADImageCellWidth +  AutoH(15)*5
+                        normalHeight = realTextHeight + SingelADImageCellWidth +  AutoH(15)*5
+                    }else{
+                        maxHeight = realTextHeight + SingelADImageCellWidth +  AutoH(15)*5
+                        normalHeight = NormalTextMaxHeight + SingelADImageCellWidth +  AutoH(15)*5
+                    }
+                }else{
+                    if realTextHeight < NormalTextMaxHeight {
+                        maxHeight = realTextHeight + AutoH(15)*4
+                        normalHeight = realTextHeight + AutoH(15)*4
+                    }else{
+                        maxHeight = realTextHeight + AutoH(15)*4
+                        normalHeight = NormalTextMaxHeight + AutoH(15)*4
+                    }
+                }
+                //当内容大于NormalTextMaxHeight时，加上全文按钮高度
+                if maxHeight > normalHeight + 2{///2是计算可容纳的误差
+                    maxHeight = maxHeight + SHOWORHIDEBUTTONHEIGHT
+                    normalHeight = normalHeight + SHOWORHIDEBUTTONHEIGHT
+                }
+                
+                if KWUser.userInfo.userType == 1 {//卖家
+                    maxHeight += AutoH(120)
+                    normalHeight += AutoH(120)
+                }else{
+                    maxHeight += AutoH(50)
+                    normalHeight += AutoH(50)
+                }
+                
+                objc.cellMaxHeight = maxHeight
+                objc.cellNormalHeight = normalHeight
+                objc.cellHeight = normalHeight
+                
+                lists.append(objc)
+            }
+        }
+        
+        return lists
+    }
+    
+    internal class func allContentShop(list : Dictionary<String,JSON>) -> Array<contentModel> {
+        var lists : Array<contentModel> = Array()
+        let array = KWParse.array(list, key: KWNetworkDefine.KEY.array.rawValue)
+        for objJson in array {
+            if let dic = objJson.dictionary {
+                let objc = contentModel()
+                objc.cotent = KWParse.string(dic, key: KWNetworkDefine.KEY.cotent.rawValue)
+                objc.region = KWParse.string(dic, key: KWNetworkDefine.KEY.region.rawValue)
+                objc.resId = KWParse.string(dic, key: KWNetworkDefine.KEY.resId.rawValue)
+                objc.cotentId = KWParse.int(dic, key: KWNetworkDefine.KEY.cotentId.rawValue)
+                objc.curPrice = KWParse.int(dic, key: KWNetworkDefine.KEY.curPrice.rawValue)
+                objc.origPrice = KWParse.int(dic, key: KWNetworkDefine.KEY.origPrice.rawValue)
+                objc.userId = KWParse.int(dic, key: KWNetworkDefine.KEY.userId.rawValue)
+                objc.addr = KWParse.string(dic, key: KWNetworkDefine.KEY.addr.rawValue)
+                objc.contactPhone = KWParse.string(dic, key: KWNetworkDefine.KEY.contactPhone.rawValue)
+                objc.imageHead = KWParse.string(dic, key: KWNetworkDefine.KEY.imageHead.rawValue)
+                objc.userName = KWParse.string(dic, key: KWNetworkDefine.KEY.userName.rawValue)
+                objc.wechatId = KWParse.string(dic, key: KWNetworkDefine.KEY.wechatId.rawValue)
+                objc.shopCode = KWParse.string(dic, key: KWNetworkDefine.KEY.shopCode.rawValue)
+                objc.contentType = KWParse.string(dic, key: KWNetworkDefine.KEY.contentType.rawValue)
+                objc.fansNum = KWParse.int(dic, key: KWNetworkDefine.KEY.fansNum.rawValue)
+                objc.userType = .saler
+                
+                var maxHeight : CGFloat = 0
+                var normalHeight : CGFloat = 0
+                let realTextHeight = GetLabHeigh(labelStr: objc.cotent, font: UIFont.systemFont(ofSize: 15), width: SCREEN_WIDTH-AutoW(30))
+                //当有图片内容时，加上图片高度
+                if objc.resId != "" {
+                    //内容少于5行情况
+                    if realTextHeight < NormalTextMaxHeight {
+                        maxHeight = realTextHeight + SingelADImageCellWidth +  AutoH(15)*5
+                        normalHeight = realTextHeight + SingelADImageCellWidth +  AutoH(15)*5
+                    }else{
+                        maxHeight = realTextHeight + SingelADImageCellWidth +  AutoH(15)*5
+                        normalHeight = NormalTextMaxHeight + SingelADImageCellWidth +  AutoH(15)*5
+                    }
+                }else{
+                    if realTextHeight < NormalTextMaxHeight {
+                        maxHeight = realTextHeight + AutoH(15)*4
+                        normalHeight = realTextHeight + AutoH(15)*4
+                    }else{
+                        maxHeight = realTextHeight + AutoH(15)*4
+                        normalHeight = NormalTextMaxHeight + AutoH(15)*4
+                    }
+                }
+                //当内容大于NormalTextMaxHeight时，加上全文按钮高度
+                if maxHeight > normalHeight + 2{///2是计算可容纳的误差
+                    maxHeight = maxHeight + SHOWORHIDEBUTTONHEIGHT
+                    normalHeight = normalHeight + SHOWORHIDEBUTTONHEIGHT
+                }
+                
+//                if KWUser.userInfo.userType == 1 {//卖家
+//                    maxHeight += AutoW(120)
+//                    normalHeight += AutoW(120)
+//                }else{
+                    maxHeight += AutoH(50)
+                    normalHeight += AutoH(50)
+//                }
+                
+                objc.cellMaxHeight = maxHeight
+                objc.cellNormalHeight = normalHeight
+                objc.cellHeight = normalHeight
+                
+                lists.append(objc)
+            }
+        }
+        
+        return lists
+    }
+    
+    internal class func getFocusFactory(list : Dictionary<String,JSON>) -> Array<FocusContent> {
+        var lists : Array<FocusContent> = Array()
+        let array = KWParse.array(list, key: KWNetworkDefine.KEY.array.rawValue)
+        for objJson in array {
+            if let dic = objJson.dictionary {
+                let objc = FocusContent()
+                objc.imageHead = KWParse.string(dic, key: KWNetworkDefine.KEY.imageHead.rawValue)
+                objc.userName = KWParse.string(dic, key: KWNetworkDefine.KEY.userName.rawValue)
+                objc.userId = KWParse.int(dic, key: KWNetworkDefine.KEY.userId.rawValue)
+                
+                lists.append(objc)
+            }
+        }
+        
+        return lists
+    }
+    
+    internal class func getAgentInfo(list : Dictionary<String,JSON>) -> agentInfo{
+        let objc = agentInfo()
+        objc.acount = KWParse.string(list, key: KWNetworkDefine.KEY.acount.rawValue)
+        objc.recommendCode = KWParse.string(list, key: KWNetworkDefine.KEY.recommendCode.rawValue)
+        return objc
     }
 }
 

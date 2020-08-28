@@ -13,7 +13,7 @@ class SSMineHeaderTableViewCell: UITableViewCell {
     lazy var iconView : UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.layer.cornerRadius = AutoW(36)
+        imageView.layer.cornerRadius = AutoW(5)
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -54,7 +54,7 @@ class SSMineHeaderTableViewCell: UITableViewCell {
     }
     
     @objc func loadData() {
-        self.iconView.kf.setImage(with: URL(string: smallImageUrl+KWUser.userInfo.image), placeholder: PlaceHolderForUserHeader, options: nil, progressBlock: nil) { (image, error, type, url) in}
+        self.iconView.kf.setImage(with: URL(string: smallImageUrl+KWUser.userInfo.imageHead), placeholder: PlaceHolderForUserHeader, options: nil, progressBlock: nil) { (image, error, type, url) in}
         self.titleLabel.text = KWUser.userInfo.userName
     }
     

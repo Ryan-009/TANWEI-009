@@ -14,7 +14,7 @@ let SCREEN_HEIGHT                      : CGFloat      = UIScreen.main.bounds.siz
 let SCREEN_BOUNDS                      : CGRect       = UIScreen.main.bounds             //屏幕尺寸bounds
 
 let PlaceHolderForUserHeader           : UIImage?     = UIImage(named : "women.png") //头像占位图
-let PlaceHolderForPreLoad              : UIImage?     = UIImage(named : "robot")       //普通图片占位图
+let PlaceHolderForPreLoad              : UIImage?     = UIImage(named : "")       //普通图片占位图
 let PlaceHolderForHomePage             : UIImage?     = UIImage(named : "personal_bg_image.jpg")       //个人页占位图
 let PlaceHolderForShare                : UIImage?     = UIImage(named : "share_normal_icon.png")
     //分割线
@@ -33,14 +33,14 @@ let APPItemUnSelectedColor     = ColorFromHexString("#333436")//未选中颜色
 let APPSeparatorColor          = ColorFromHexString("#e5e5e5")//分割线颜色
 
 //tabbar item imageName
-var ImageNameForNomalHomeItem           = "发现-未选中.png"
-var ImageNameForPressHomeItem           = "发现-已选中.png"
-var ImageNameForNomalSCENEItem          = "salestar_app_tab_icon_ad_u.png"
-var ImageNameForPressSCENEItem          = "salestar_app_tab_icon_ad_s.png"
-var ImageNameForNomalSERVERItem         = "server.png"
-var ImageNameForPressSERVERItem         = "server_highlight.png"
-var ImageNameForNomalPROFILEItem        = "我的-未选中.png"
-var ImageNameForPressPROFILEItem        = "我的-已选中.png"
+var ImageNameForNomalHomeItem           = "tanwei_tab_find_icon_u.png"
+var ImageNameForPressHomeItem           = "tanwei_tab_find_icon_s.png"
+var ImageNameForNomalLikeItem          = "tanwei_tab_following_icon_u.png"
+var ImageNameForPressLikeItem          = "tanwei_tab_following_icon_s.png"
+var ImageNameForNomalPublishItem         = "tanwei_tab_publish_icon_u.png"
+var ImageNameForPressPublishItem         = "tanwei_tab_publish_icon_s.png"
+var ImageNameForNomalPROFILEItem        = "tanwei_tab_mine_icon_u.png"
+var ImageNameForPressPROFILEItem        = "tanwei_tab_mine_icon_s.png"
 
 let NavHeight : CGFloat = SCREEN_HEIGHT == 812.0 ? 88 : (SCREEN_HEIGHT == 896.0 ? 88 : 64)
 let TabHeight : CGFloat = SCREEN_HEIGHT == 812.0 ? 83 : (SCREEN_HEIGHT == 896.0 ? 83 : 49)

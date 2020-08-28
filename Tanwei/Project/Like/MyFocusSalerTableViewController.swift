@@ -7,84 +7,108 @@
 //
 
 import UIKit
+import MJRefresh
 
 class MyFocusSalerTableViewController: UITableViewController {
 
+    lazy var nil_imageView : UIImageView = {
+        let imagV = UIImageView()
+        imagV.image = UIImage(named: "tanwei_empty_img.png")
+        imagV.frame.size = CGSize(width: AutoW(155), height: AutoW(155))
+        imagV.contentMode = .scaleAspectFit
+        imagV.clipsToBounds = true
+        return imagV
+    }()
+    
+    lazy var nil_label : UILabel = {
+        let label = UILabel()
+        label.frame.size = CGSize(width: SCREEN_WIDTH, height: AutoW(40))
+        label.textColor = ColorFromHexString("#969696")
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.text = "您尚未关注任何批发商"
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.sizeToFit()
+        return label
+    }()
+    
+    var contentlist : [FocusContent] = [] {
+        didSet{
+            self.tableView.reloadData()
+        }
+    }
+    private var page = 0
+    private let limit = 10
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        selfInit()
+        loadData()
+    }
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    func selfInit() {
+        self.tableView.tableFooterView = UIView(frame: .zero)
+        self.tableView.register(UINib(nibName: "WholesalerTableViewCell", bundle: nil), forCellReuseIdentifier: "WHOLESALERCELLID")
+        
+        let header = MJRefreshNormalHeader()
+        header.setRefreshingTarget(self, refreshingAction: #selector(loadData))
+        self.tableView.mj_header = header
+    }
+    
+    @objc private func loadData() {
+        page = 0
+        Application.list.focusGetShop(start: page, limit: limit, success: {list in
+            self.contentlist = list
+            self.checkNet_break()
+            self.tableView.mj_header?.endRefreshing()
+        }) {
+            self.checkNet_break()
+            self.tableView.mj_header?.endRefreshing()
+        }
+    }
+    
+    func checkNet_break(){
+        if self.contentlist.count == 0{
+            self.nil_imageView.center = CGPoint(x: SCREEN_WIDTH * 0.5, y: (SCREEN_HEIGHT) * 0.4)
+            self.view.addSubview(self.nil_imageView)
+            self.nil_label.center = CGPoint(x: SCREEN_WIDTH * 0.5, y: SCREEN_HEIGHT * 0.56)
+            self.view.addSubview(self.nil_label)
+        }else{
+            self.nil_label.removeFromSuperview()
+            self.nil_imageView.removeFromSuperview()
+        }
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return contentlist.count
     }
-
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WHOLESALERCELLID", for: indexPath) as! WholesalerTableViewCell
+        cell.updateData(data: self.contentlist[indexPath.row])
+        cell.visitBlock = {() in
+            let vc = ShopDetailViewController.init()
+            vc.saleType = .wholesaler
+            vc.userId = self.contentlist[indexPath.row].userId
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

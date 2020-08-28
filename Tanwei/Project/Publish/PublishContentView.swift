@@ -99,9 +99,9 @@ class PublishContentView : UIView,UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if textView.text.count > 50 {
-            return false
-        }
+//        if textView.text.count > 50 {
+//            return false
+//        }
         return true
     }
 }

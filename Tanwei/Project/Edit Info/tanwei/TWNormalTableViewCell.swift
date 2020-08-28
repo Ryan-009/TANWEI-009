@@ -12,6 +12,7 @@ class TWNormalTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var redPoint: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,5 +44,13 @@ class TWNormalTableViewCell: UITableViewCell {
         }else if indexpath.row == 1 {
             self.titleLabel.attributedText = GetAttributeString(orString: "* 发货地", attString: "*", attrs: [NSAttributedString.Key.foregroundColor : UIColor.red])
         }
+    }
+    
+    func showRedpoint() {
+        self.redPoint.isHidden = false
+    }
+    
+    func hideRedpoint() {
+        self.redPoint.isHidden = true
     }
 }

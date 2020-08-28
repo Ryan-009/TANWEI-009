@@ -27,14 +27,13 @@ class KWBaseTabBarViewController: UITabBarController,UITabBarControllerDelegate 
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        
-        if (viewController.tabBarItem.title == "我的" || viewController.tabBarItem.title == "发广告") && !KWLogin.existLoginStatus(){
-            let vc = SSLoginViewController()
+        if (viewController.tabBarItem.title == "我的" || viewController.tabBarItem.title == "已关注" || viewController.tabBarItem.title == "发布商品" ) && !KWLogin.existLoginStatus() {
+            let vc = SSLoginViewController.init()
             let nav = KWBaseNavigationController.init(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
             self.present(nav, animated: true, completion: nil)
             return false
         }
-        
         return true
     }
     @objc func finishEdit() {

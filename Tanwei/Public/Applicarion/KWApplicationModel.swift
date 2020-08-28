@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class KWHomeModel: NSObject {
     var homeId              : String = ""
@@ -131,6 +132,7 @@ class authorModel: NSObject {
 }
 
 class contentDtoModel: NSObject {
+    
     var author : authorModel = authorModel()
     var companyPortal : String = ""
     var content : String = ""
@@ -176,4 +178,55 @@ class allBannarModel: NSObject {
     var resId : String = ""
     var updateTime : String = ""
     var winsDt : String = ""
+}
+
+class contentModel: NSObject {
+
+    var cotent : String = ""
+    var cotentId : Int = 0
+    var curPrice : Int = 0
+    var origPrice : Int = 0
+    var region : String = ""
+    var resId : String = ""
+    var userId : Int = 0
+    var addr : String = ""
+    var contactPhone : String = ""
+    var imageHead : String = ""
+    var userName : String = ""
+    var wechatId : String = ""
+    var shopCode : String = ""
+    var fansNum : Int = 0
+    var contentType : String = ""
+    var imagesForTransmit : [UIImage] = []
+    var userType : KWNetworkDefine.userType = .unknow
+    var showAll : Bool = false {
+        didSet{
+            if showAll {
+                cellHeight = cellMaxHeight
+            }else{
+                cellHeight = cellNormalHeight
+            }
+        }
+    }
+    var cellHeight       : CGFloat = 0
+    var cellMaxHeight    : CGFloat = 0
+    var cellNormalHeight : CGFloat = 0
+}
+
+class FocusContent : NSObject {
+    var imageHead : String = ""
+    var userName : String = ""
+    var userId : Int = 0
+}
+
+class agentInfo : NSObject {
+    
+    var acount : String = ""
+    var agent_status : String = ""
+    var recommendCode : String = ""
+    
+//    acount = "754208608@qq.com";
+//    "agent_status" = 1;
+//    imageHead = 35;
+//    recommendCode = 000004;
 }

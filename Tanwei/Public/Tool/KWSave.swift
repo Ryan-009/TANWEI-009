@@ -45,6 +45,15 @@ enum KWSaveKey : String {
     case jobPosition        = "SAVE_KEY_jobPosition"
     case jobDesc            = "SAVE_KEY_jobDesc"
     case commanyAddr        = "SAVE_KEY_commanyAddr"
+    
+    
+    
+    case addr               = "SAVE_KEY_Addr"
+    case contactPhone       = "SAVE_KEY_contactPhone"
+    case imageHead          = "SAVE_KEY_imageHead"
+    case userType           = "SAVE_KEY_userType"
+    case vipStatus          = "SAVE_KEY_vipStatus"
+    case overTime          = "SAVE_KEY_overTime"
 }
 
 

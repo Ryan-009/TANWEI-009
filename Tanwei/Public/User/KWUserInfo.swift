@@ -37,17 +37,27 @@ class KWUserInfo : KWUserInfoBase {
     @objc var location          : String = ""
     @objc var password          : String = ""
     @objc var website           : String = ""
-    @objc var userName          : String = ""
+//    @objc var userName          : String = ""
     @objc var phone             : String = ""
     @objc var userId            : Int    = 0
     @objc var image             : String  = ""
-    @objc var wechatId          : String  = ""
+//    @objc var wechatId          : String  = ""
     @objc var cPhone            : String  = ""
     @objc var jobPosition       : String  = ""
     @objc var jobDesc           : String  = ""
     @objc var commanyAddr       : String  = ""
     @objc var email             : String  = ""
+ 
     
+    //---------------------Tanwei--------------------//
+    @objc var addr                  : String = ""
+    @objc var contactPhone          : String = ""
+    @objc var imageHead             : String = ""
+    @objc var userName              : String = ""
+    @objc var userType              : Int    = 0
+    @objc var wechatId              : String = ""
+    @objc var vipStatus              : Int    = 0
+    @objc var overTime              : String = ""
     
     public func upload(info : Dictionary<String, Any> , result: @escaping (_ result : KWNetworkError.ErrorType)->()) {
         KWNetwork.updateUserBaseMsg(parameters: info, resendConfig: nil, success: { (respond) in
@@ -76,53 +86,29 @@ class KWUserInfo : KWUserInfoBase {
     override internal func convertToSaveKey(key: String) -> KWSaveKey {
         switch key {
     
-        case KWNetworkDefine.KEY.company.rawValue:
-            return .company
+        case KWNetworkDefine.KEY.addr.rawValue:
+            return .addr
             
-        case KWNetworkDefine.KEY.createTime.rawValue:
-            return .createTime
+        case KWNetworkDefine.KEY.contactPhone.rawValue:
+            return .contactPhone
             
-        case KWNetworkDefine.KEY.label.rawValue:
-            return .label
-
-        case KWNetworkDefine.KEY.location.rawValue:
-            return .location
-
-        case KWNetworkDefine.KEY.password.rawValue:
-            return .password
-
-        case KWNetworkDefine.KEY.website.rawValue:
-            return .website
-
-        case KWNetworkDefine.KEY.phone.rawValue:
-            return .phone
-
-        case KWNetworkDefine.KEY.userId.rawValue:
-            return .userId
+        case KWNetworkDefine.KEY.imageHead.rawValue:
+            return .imageHead
             
         case KWNetworkDefine.KEY.userName.rawValue:
             return .userName
-        
-        case KWNetworkDefine.KEY.image.rawValue:
-            return .image
 
-        case KWNetworkDefine.KEY.cPhone.rawValue:
-            return .cPhone
-            
+        case KWNetworkDefine.KEY.userType.rawValue:
+            return .userType
+
         case KWNetworkDefine.KEY.wechatId.rawValue:
             return .wechatId
-            
-        case KWNetworkDefine.KEY.jobPosition.rawValue:
-            return .jobPosition
-            
-        case KWNetworkDefine.KEY.jobDesc.rawValue:
-            return .jobDesc
-            
-        case KWNetworkDefine.KEY.commanyAddr.rawValue:
-            return .commanyAddr
-            
-        case KWNetworkDefine.KEY.email.rawValue:
-            return .email
+
+        case KWNetworkDefine.KEY.vipStatus.rawValue:
+            return .vipStatus
+        
+        case KWNetworkDefine.KEY.overTime.rawValue:
+            return .overTime
             
         default:
             return .none

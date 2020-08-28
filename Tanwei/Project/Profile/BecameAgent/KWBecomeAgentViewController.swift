@@ -8,23 +8,39 @@
 
 import UIKit
 
-class KWBecomeAgentViewController: UIViewController {
+class KWBecomeAgentViewController: KWBaseViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    let agentView = KWBecomAgentView.init(frame: CGRect(x: AutoW(45), y: NavHeight+15, width: SCREEN_WIDTH-AutoW(90), height: AutoW(440)))
+    
+    lazy var closeButton : UIButton = {
+        let btn = UIButton.init(type: .custom)
+        btn.setImage(UIImage(named: "tanwei_popup_close_icon"), for: .normal)
+        btn.addTarget(self, action: #selector(closeClick), for: .touchUpInside)
+        return btn
+    }()
+    
+    var data : agentInfo = agentInfo() {
+        didSet{
+            self.agentView.data =  self.data
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        self.modalPresentationStyle = .custom
+        self.view.addSubview(agentView)
+        self.view.addSubview(closeButton)
+        closeButton.snp.makeConstraints { (make) in
+            make.top.equalTo(agentView.snp.bottom).offset(AutoW(15))
+            make.centerX.equalToSuperview()
+        }
+        
     }
-    */
-
+    
+    @objc private func closeClick() {
+        DispatchQueue.main.async {
+            self.dismiss(animated: false, completion: nil)
+        }
+    }
 }

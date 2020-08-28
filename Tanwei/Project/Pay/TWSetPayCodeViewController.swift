@@ -8,23 +8,46 @@
 
 import UIKit
 
-class TWSetPayCodeViewController: UIViewController {
-
+class TWSetPayCodeViewController: KWBaseViewController ,UITextFieldDelegate{
+    
+    @IBOutlet weak var oddNumberTextFeild: UITextField!
+    @IBOutlet weak var submitButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.title = "填写交易单号"
+        oddNumberTextFeild.delegate = self
+        submitButton.backgroundColor = APPSubjectColor
+        submitButton.addTarget(self, action: #selector(submitFunc), for: .touchUpInside)
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        UIView.animate(withDuration: 0.25) {
+            self.view.frame.origin.y = -250
+        }
+        return true
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        UIView.animate(withDuration: 0.25) {
+            self.view.frame.origin.y = 0
+        }
+        return true
     }
-    */
-
+    
+    @objc private func submitFunc() {
+        if self.oddNumberTextFeild.text!.isEmpty {
+            KWHUD.showInfo(info: "请输入订单号")
+            return
+        }
+        HUD.show()
+        Application.opration.orderSave(orderCode: self.oddNumberTextFeild.text!, success: {
+            HUD.dismiss()
+            KWUser.userInfo.update()
+            let vc = TWSubmitOddNumberSuccessViewController.init(nibName: "TWSubmitOddNumberSuccessViewController", bundle: nil)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }) {}
+    }
 }

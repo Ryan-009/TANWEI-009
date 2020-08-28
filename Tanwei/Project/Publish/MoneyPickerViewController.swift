@@ -15,15 +15,12 @@ class MoneyPickerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.modalPresentationStyle = .custom
         self.view.addSubview(picker)
         picker.clickBlock = {type,left,right in
-            
             if type == .comfirm {
                 self.didSelected!(left,right)
             }
-            
             UIView.animate(withDuration: 0.25, animations: {
                 self.picker.frame.origin.y = SCREEN_HEIGHT
             }) { (finish) in

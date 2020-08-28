@@ -39,16 +39,16 @@ extension KWLogin {
             success(respond)
         }) { (err) in}
     }
-
+    
     //ps登录
     private class func login(account : String, password : String, success: @escaping (_ respond : KWNetworkRespond)->(), failure: @escaping (_ error : KWNetworkError.ErrorType)->())  {
-        
         KWNetwork.login(account: account, password: password, success: { (respond) in
             success(respond)
         }) { (error) in
             failure(error)
         }
     }
+    
     //sms登录
     private class func loginByCaptcha(account : String, captcha : String, success: @escaping (_ respond : KWNetworkRespond)->(), failure: @escaping (_ error : KWNetworkError.ErrorType)->())  {
         KWNetwork.loginByCaptcha(phone: account, captcha: captcha, success: { (res) in

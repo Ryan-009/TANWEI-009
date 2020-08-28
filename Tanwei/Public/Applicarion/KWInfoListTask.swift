@@ -52,10 +52,77 @@ class KWInfoListTask: NSObject {
         }
     }
     
+    internal func getAgentInfo(success: @escaping (_ data:agentInfo)->(), failure: @escaping ()->()) {
+        KWNetwork.getAgentInfo(resendConfig: KWNetworkResendConfig(interval: 1, resendCount: 2), success: { (respond) in
+            success(KWParseTask.getAgentInfo(list: respond.data))
+        }) { (err) in
+            failure()
+        }
+    }
     
+    internal func allContentFactory(parameters:[String:Any],success: @escaping (_ list : Array<contentModel>)->(), failure: @escaping ()->()) {
+        KWNetwork.allContentFactory(parameters: parameters, resendConfig: nil, success: { (respond) in
+            success(KWParseTask.allContentFactory(list: respond.data))
+        }) { (err) in
+            failure()
+        }
+    }
     
+    internal func allContentShop(parameters:[String:Any],success: @escaping (_ list : Array<contentModel>)->(), failure: @escaping ()->()) {
+        KWNetwork.allContentShop(parameters: parameters, resendConfig: nil, success: { (respond) in
+            success(KWParseTask.allContentShop(list: respond.data))
+        }) { (err) in
+            failure()
+        }
+    }
     
+    internal func getCustomer(success: @escaping ()->(), failure: @escaping ()->()) {
+        KWNetwork.getCustomer(resendConfig: KWNetworkResendConfig(interval: 1, resendCount: 2), success: { (respond) in
+            success()
+        }) { (err) in
+            failure()
+        }
+    }
     
+    internal func getFactory(success: @escaping ()->(), failure: @escaping ()->()) {
+        KWNetwork.getFactory(resendConfig: KWNetworkResendConfig(interval: 1, resendCount: 2), success: { (respond) in
+            success()
+        }) { (err) in
+            failure()
+        }
+    }
+    
+    internal func getShop(success: @escaping ()->(), failure: @escaping ()->()) {
+        KWNetwork.getShop(resendConfig: KWNetworkResendConfig(interval: 1, resendCount: 2), success: { (respond) in
+            success()
+        }) { (err) in
+            failure()
+        }
+    }
+    
+    internal func getContent(success: @escaping ()->(), failure: @escaping ()->()) {
+        KWNetwork.getContent(resendConfig: KWNetworkResendConfig(interval: 1, resendCount: 2), success: { (respond) in
+            success()
+        }) { (err) in
+            failure()
+        }
+    }
+    
+    internal func focusGetFactory(start:Int,limit:Int,success: @escaping (_ list : [FocusContent])->(), failure: @escaping ()->()) {
+        KWNetwork.focusGetFactory(start: start, limit: limit, resendConfig: KWNetworkResendConfig(interval: 1, resendCount: 2), success: { (respond) in
+            success(KWParseTask.getFocusFactory(list: respond.data))
+        }) { (err) in
+            failure()
+        }
+    }
+    
+    internal func focusGetShop(start:Int,limit:Int,success: @escaping (_ list : [FocusContent])->(), failure: @escaping ()->()) {
+        KWNetwork.focusGetShop(start: start, limit: limit, resendConfig: KWNetworkResendConfig(interval: 1, resendCount: 2), success: { (respond) in
+            success(KWParseTask.getFocusFactory(list: respond.data))
+        }) { (err) in
+            failure()
+        }
+    }
     
 }
 

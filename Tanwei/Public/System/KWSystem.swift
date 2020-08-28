@@ -47,6 +47,7 @@ class KWSystem: NSObject {
         KWUser.close()              //关闭User 功能
     }
     
+    //登录
     class func loginPresent(_ target:UIViewController) {
         if !KWLogin.existLoginStatus() {
             let vc = SSLoginViewController()

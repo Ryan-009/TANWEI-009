@@ -12,11 +12,15 @@ class TWSubmitOddNumberSuccessViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.title = "填写转账单号"
         // Do any additional setup after loading the view.
+        self.navigationItem.leftBarButtonItem = SetBackBarButtonItem(target: self, action: #selector(back), imageName: "back")
     }
 
-
+    @objc func back() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
     /*
     // MARK: - Navigation
 

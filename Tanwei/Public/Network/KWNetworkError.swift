@@ -75,7 +75,7 @@ extension KWNetworkError {
         case 10011   : return .phoneNumberFormatError
         case 10000   : return .phoneNumberUnRegiste
         case 10007   : return .smsInvalid
-        case 10002   : return .tokenInvalid//登录态失效
+        case 401   : return .tokenInvalid//登录态失效
         case 10001   : return .unLogin
         case 10020   : return .passwordError
         
